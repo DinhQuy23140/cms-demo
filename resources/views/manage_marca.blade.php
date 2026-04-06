@@ -83,13 +83,13 @@ d="M5.121 17.804A4 4 0 019 16h6a4 4 0 013.879 1.804"/>
 <main class="flex-1 p-6">
 
 <div class="text-gray-500 mb-4">
-Home / Notificaciones
+Home / Marca
 </div>
 
 <div class="flex justify-between mb-4">
 
 <h1 class="text-xl font-semibold">
-Notificaciones
+Marca
 </h1>
 
 <button class="bg-blue-600 text-white px-4 py-2 rounded">

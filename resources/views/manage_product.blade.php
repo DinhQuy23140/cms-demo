@@ -216,13 +216,13 @@ Home / Products
                         <input 
                             type="file" 
                             accept="image/*" 
-                            id="iconUpload1"
+                            id="iconUploadDetail1"
                             class="hidden"
-                            onchange="previewIcon(event,'preview1')"
+                            onchange="previewIcon(event,'previewDetail1')"
                         >
 
                         <!-- svg button -->
-                        <label for="iconUpload1" class="cursor-pointer flex items-center justify-center">
+                        <label for="iconUploadDetail1" class="cursor-pointer flex items-center justify-center">
 
                             <svg xmlns="http://www.w3.org/2000/svg" 
                                 class="w-6 h-6 text-gray-500 hover:text-blue-500"
@@ -236,7 +236,7 @@ Home / Products
                         </label>
 
                         <!-- preview image -->
-                        <img id="preview1" class="mt-2 h-8 hidden">
+                        <img id="previewDetail1" class="mt-2 h-8 hidden">
 
                     </td>
 
@@ -316,7 +316,7 @@ Home / Products
                 Product Base On Color
             </h2>
 
-            <button
+            <button id="addColorBtn"
             class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
                 + Add Color
             </button>
@@ -342,7 +342,7 @@ Home / Products
 
             </thead>
 
-            <tbody>
+            <tbody id="colorTableBody">
 
                 <tr class="border-t">
 
@@ -356,13 +356,13 @@ Home / Products
                         <input 
                             type="file" 
                             accept="image/*" 
-                            id="iconUpload1"
+                            id="iconUploadColor1"
                             class="hidden"
-                            onchange="previewIcon(event,'preview1')"
+                            onchange="previewIcon(event,'previewColor1')"
                         >
 
                         <!-- svg button -->
-                        <label for="iconUpload1" class="cursor-pointer flex items-center justify-center">
+                        <label for="iconUploadColor1" class="cursor-pointer flex items-center justify-center">
 
                             <svg xmlns="http://www.w3.org/2000/svg" 
                                 class="w-6 h-6 text-gray-500 hover:text-blue-500"
@@ -376,7 +376,7 @@ Home / Products
                         </label>
 
                         <!-- preview image -->
-                        <img class="mt-2 h-8 hidden">
+                        <img id="previewColor1" class="mt-2 h-8 hidden">
 
                     </td>
 
@@ -424,7 +424,7 @@ Home / Products
                         bg-red-500 text-white
                         rounded-lg
                         hover:bg-red-600
-                        transition flex items-center gap-1">
+                        transition flex items-center gap-1 delete-color-btn">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                             </svg>
@@ -623,6 +623,14 @@ function previewIcon(event, previewId){
     const file = event.target.files[0];
 
     if(file){
+        if (!file.type.startsWith('image/')) {
+            alert('Please select a valid image file.');
+            return;
+        }
+        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+            alert('File size must be less than 5MB.');
+            return;
+        }
         const preview = document.getElementById(previewId);
         preview.src = URL.createObjectURL(file);
         preview.classList.remove("hidden");
@@ -654,24 +662,30 @@ if (addDetailBtn && detailTableBody) {
 }
 
 function addDetailRow() {
+    const uniqueId = Date.now() + Math.random().toString(36).substr(2, 9);
+    const iconUploadId = 'iconUploadDetail' + uniqueId;
+    const previewId = 'previewDetail' + uniqueId;
     const row = document.createElement("tr");
     row.className = "border-t detail-row";
     row.innerHTML = `
         <td class="p-2 w-16 text-center text-sm text-gray-600">
-            <input type="number" class="border p-1 rounded w-full">
+            <span>-</span>
         </td>
         <td class="p-2 w-32 h-32 flex items-center justify-center border rounded mx-auto my-2 relative">
-            <div class="text-center text-gray-400 text-xs">
-                <div class="mb-1">Icon</div>
-                <button type="button" class="px-2 py-1 text-white bg-slate-600 rounded-lg">Upload</button>
-            </div>
+            <input type="file" accept="image/*" id="${iconUploadId}" class="hidden" onchange="previewIcon(event,'${previewId}')">
+            <label for="${iconUploadId}" class="cursor-pointer flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500 hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 16l4-4a3 3 0 014 0l4 4m0 0l4-4a3 3 0 014 0l4 4M3 16v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
+                </svg>
+            </label>
+            <img id="${previewId}" class="mt-2 h-8 hidden">
         </td>
         <td class="p-2">
             <input type="text" class="border p-1 rounded w-full">
         </td>
         <td class="p-2">
             <div class="flex items-center gap-2 px-2 py-1 border rounded-md bg-gray-50 w-fit">
-                <input type="color" value="#000000" class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer">
+                <input type="color" value="#000000" class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer" oninput="updateColorCode(this)">
                 <span class="text-xs font-mono text-gray-600">#000000</span>
             </div>
         </td>
@@ -680,7 +694,7 @@ function addDetailRow() {
         </td>
         <td class="p-2">
             <div class="flex items-center gap-2 px-2 py-1 border rounded-md bg-gray-50 w-fit">
-                <input type="color" value="#000000" class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer">
+                <input type="color" value="#000000" class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer" oninput="updateColorCode(this)">
                 <span class="text-xs font-mono text-gray-600">#000000</span>
             </div>
         </td>
@@ -694,6 +708,76 @@ function addDetailRow() {
         </td>
     `;
     detailTableBody.appendChild(row);
+}
+const addColorBtn = document.getElementById("addColorBtn");
+const colorTableBody = document.getElementById("colorTableBody");
+
+if (addColorBtn && colorTableBody) {
+    addColorBtn.addEventListener("click", () => {
+        addColorRow();
+    });
+
+    colorTableBody.addEventListener("click", (event) => {
+        const deleteButton = event.target.closest(".delete-color-btn");
+        if (deleteButton) {
+            const row = deleteButton.closest("tr");
+            if (row) {
+                row.remove();
+            }
+        }
+    });
+}
+
+function addColorRow() {
+    const uniqueId = Date.now() + Math.random().toString(36).substr(2, 9);
+    const iconUploadId = 'iconUploadColor' + uniqueId;
+    const previewId = 'previewColor' + uniqueId;
+    const row = document.createElement("tr");
+    row.className = "border-t color-row";
+    row.innerHTML = `
+        <td class="p-2 w-16">
+            <input type="number" class="border p-1 rounded w-full">
+        </td>
+        <td class="p-2 w-32 h-32 flex items-center justify-center border rounded mx-auto my-2 relative">
+            <input type="file" accept="image/*" id="${iconUploadId}" class="hidden" onchange="previewIcon(event,'${previewId}')">
+            <label for="${iconUploadId}" class="cursor-pointer flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500 hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 16l4-4a3 3 0 014 0l4 4m0 0l4-4a3 3 0 014 0l4 4M3 16v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
+                </svg>
+            </label>
+            <img id="${previewId}" class="mt-2 h-8 hidden">
+        </td>
+        <td class="p-2">
+            <div class="flex items-center gap-2 px-2 py-1 border rounded-md bg-gray-50 w-fit">
+                <input type="color" value="#000000" class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer" oninput="updateColorCode(this)">
+                <span class="text-xs font-mono text-gray-600">#000000</span>
+            </div>
+        </td>
+        <td class="p-2">
+            <input type="number" class="border p-1 rounded w-full" placeholder="Stock">
+        </td>
+        <td class="p-2">
+            <input type="number" class="border p-1 rounded w-full" placeholder="Origin Price">
+        </td>
+        <td class="p-2">
+            <input type="number" class="border p-1 rounded w-full" placeholder="Discount">
+        </td>
+        <td class="p-2">
+            <input type="text" class="border p-1 rounded w-full" placeholder="URL">
+        </td>
+        <td class="p-2">
+            <input type="text" class="border p-1 rounded w-full" placeholder="Product Code BCCS">
+        </td>
+        <td class="p-2 flex gap-2 justify-end w-32">
+            <button type="button" class="px-3 py-1 mr-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition flex items-center gap-1 delete-color-btn">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+                Delete
+            </button>
+        </td>
+    `;
+    colorTableBody.appendChild(row);
 }
 
 </script>

@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::view('/manage_product', 'manage_product');
+Route::view('/manage_notifi', 'manage_notifi');
+Route::view('/manage_marca', 'manage_marca');
