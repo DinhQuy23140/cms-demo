@@ -32,7 +32,7 @@ class="w-64  text-black transition-all duration-300">
 <ul class="p-2 space-y-2">
 
 <!-- DASHBOARD -->
-<li class="flex items-center p-3 rounded hover:bg-slate-700 border border-gray-500 rounded-xl">
+<li class="flex items-center p-3 rounded border border-gray-500 rounded-xl">
 
 <svg class="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -43,7 +43,7 @@ d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3
 
 </li>
 
-<li class="flex items-center p-3 rounded hover:bg-slate-700">
+<li class="flex items-center p-3 rounded ">
 
 <svg class="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -54,7 +54,7 @@ d="M20 13V7a2 2 0 00-2-2h-3V3H9v2H6a2 2 0 00-2 2v6"/>
 
 </li>
 
-<li class="flex items-center p-3 rounded hover:bg-slate-700">
+<li class="flex items-center p-3 rounded ">
 
 <svg class="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -210,35 +210,36 @@ Home / Products
                         <input type="number" class="border p-1 rounded w-full">
                     </td>
 
-                    <td class="p-2 w-32 h-32 flex items-center justify-center border rounded mx-auto my-2 relative">
+<td class="p-2">
+    <label for="iconUploadDetail1"
+        class="w-20 h-20 mx-auto flex flex-col items-center justify-center 
+        border-2 border-dashed border-gray-200 rounded-xl cursor-pointer
+        hover:border-blue-400 hover:bg-blue-50 transition relative overflow-hidden">
 
-                        <!-- hidden file input -->
-                        <input 
-                            type="file" 
-                            accept="image/*" 
-                            id="iconUploadDetail1"
-                            class="hidden"
-                            onchange="previewIcon(event,'previewDetail1')"
-                        >
+        <!-- Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+            class="w-5 h-5 text-gray-400 group-hover:text-blue-500"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 16l4-4a3 3 0 014 0l4 4m0 0l4-4a3 3 0 014 0l4 4M3 16v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
+        </svg>
 
-                        <!-- svg button -->
-                        <label for="iconUploadDetail1" class="cursor-pointer flex items-center justify-center">
+        <span class="text-[10px] text-gray-400 mt-1">Upload</span>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" 
-                                class="w-6 h-6 text-gray-500 hover:text-blue-500"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Preview -->
+        <img id="previewDetail1"
+            class="absolute inset-0 w-full h-full object-cover hidden">
 
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 16l4-4a3 3 0 014 0l4 4m0 0l4-4a3 3 0 014 0l4 4M3 16v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
-
-                            </svg>
-
-                        </label>
-
-                        <!-- preview image -->
-                        <img id="previewDetail1" class="mt-2 h-8 hidden">
-
-                    </td>
+        <!-- Input -->
+        <input 
+            type="file"
+            accept="image/*"
+            id="iconUploadDetail1"
+            class="hidden"
+            onchange="previewIcon(event,'previewDetail1')"
+        >
+    </label>
+</td>
 
                     <td class="p-2">
                         <input type="text" class="border p-1 rounded w-full">
@@ -350,35 +351,36 @@ Home / Products
                         <input type="number" class="border p-1 rounded w-full">
                     </td>
 
-                    <td class="p-2 w-32 h-32 flex items-center justify-center border rounded mx-auto my-2 relative">
+<td class="p-2">
+    <label for="iconUploadColor1"
+        class="w-24 h-24 mx-auto flex flex-col items-center justify-center
+        border-2 border-dashed border-gray-200 rounded-xl cursor-pointer
+        hover:border-blue-400 hover:bg-blue-50 transition relative overflow-hidden">
 
-                        <!-- hidden file input -->
-                        <input 
-                            type="file" 
-                            accept="image/*" 
-                            id="iconUploadColor1"
-                            class="hidden"
-                            onchange="previewIcon(event,'previewColor1')"
-                        >
+        <!-- Icon -->
+        <svg xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6 text-gray-400"
+            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 16l4-4a3 3 0 014 0l4 4m0 0l4-4a3 3 0 014 0l4 4M3 16v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
+        </svg>
 
-                        <!-- svg button -->
-                        <label for="iconUploadColor1" class="cursor-pointer flex items-center justify-center">
+        <span class="text-xs text-gray-400 mt-1">Upload</span>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" 
-                                class="w-6 h-6 text-gray-500 hover:text-blue-500"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- Preview -->
+        <img id="previewColor1"
+            class="absolute inset-0 w-full h-full object-cover hidden">
 
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 16l4-4a3 3 0 014 0l4 4m0 0l4-4a3 3 0 014 0l4 4M3 16v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
-
-                            </svg>
-
-                        </label>
-
-                        <!-- preview image -->
-                        <img id="previewColor1" class="mt-2 h-8 hidden">
-
-                    </td>
+        <!-- Input -->
+        <input 
+            type="file"
+            accept="image/*"
+            id="iconUploadColor1"
+            class="hidden"
+            onchange="previewIcon(event,'previewColor1')"
+        >
+    </label>
+</td>
 
                     <td class="p-2">
                         <div class="flex items-center gap-2 px-2 py-1 border rounded-md bg-gray-50 w-fit">
