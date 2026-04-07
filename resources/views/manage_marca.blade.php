@@ -542,11 +542,12 @@
     <div id="modalMarca" class="fixed inset-0 bg-black/60 hidden z-50 flex items-center justify-center p-4">
 
         <form id="marcaFormElem"
-            class="w-full max-w-4xl bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden flex flex-col">
+            class="w-[1128px] h-[382px] bg-white rounded-2xl shadow-xl border overflow-hidden flex flex-col gap-[20px]
+            py-[15px] px-[37px]">
 
             <!-- HEADER -->
-            <div class="flex items-center justify-between px-6 py-4">
-                <h1 class="text-lg font-semibold text-gray-800">
+            <div class="flex items-center justify-between ">
+                <h1 class="font-inter font-semibold text-[20px] leading-none text-gray-800">
                     Agregar nuevo Marca
                 </h1>
                 <button id="closeMarcaModal" type="button"
@@ -556,39 +557,37 @@
             </div>
 
             <!-- BODY -->
-            <div class="p-6 space-y-6">
+            <div class="flex flex-col gap-[20px]">
 
                 <!-- FORM SECTION -->
-                <div class="">
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="flex gap-[20px]">
 
-                        <div class="flex flex-col md:col-span-1 space-y-1">
-                            <label for="input2" class="text-sm font-medium text-gray-700">
-                                Marca ID
-                            </label>
-                            <input id="input2" type="text" placeholder="Ingresar ID del marca"
-                                class="border border-gray-200 rounded-xl px-3 py-2 text-sm w-full shadow-sm placeholder-gray-600
-                                focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-                        </div>
+                    <div class="flex flex-col gap-[6px]">
+                        <label class="font-inter font-normal text-[15px] leading-none tracking-normal">
+                            Marca ID
+                        </label>
+                        <input type="text" placeholder = "Ingresar ID del marca"
+                            class="border border-[#DDDDDD] rounded-[10px] text-sm w-[387px] h-[41px] px-3 placeholder-[#666666]
+                            placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
 
-                        <div class="flex flex-col md:col-span-2 space-y-1">
-                            <label for="input1" class="text-sm font-medium text-gray-700">
-                                Nombre del Marca
-                            </label>
-                            <input id="input1" type="text" placeholder="Ingresar nombre del marca"
-                                class="border border-gray-200 rounded-xl px-3 py-2 text-sm w-full shadow-sm placeholder-gray-600
-                                focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-                        </div>
-
+                    <div class="flex flex-col gap-[6px]">
+                        <label class="font-inter font-normal text-[15px] leading-none tracking-normal">
+                            Nombre del Marca
+                        </label>
+                        <input type="text" placeholder = "Ingresar nombre del marca"
+                            class="border border-[#DDDDDD] rounded-[10px] text-sm w-[647px] h-[41px] px-3
+                            placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
                 </div>
 
-                <!-- TOGGLE -->
-                <div class=" flex items-center justify-start gap-4">
 
-                    <span class="text-sm text-gray-700">
+                <!-- TOGGLE -->
+                <div class=" flex items-center justify-start gap-[40px]">
+
+                    <span class="text-[16px] font-inter">
                         Estado
                     </span>
 
@@ -614,16 +613,22 @@
             </div>
 
             <!-- FOOTER -->
-            <div class="flex justify-start gap-10 px-6 py-4 bg-gray-50">
+            <div class="flex justify-start gap-[40px]">
                 <button type="submit" id="saveMarcaBtn"
-                    class="px-5 py-2 text-sm rounded-xl bg-blue-800 text-white
-                    hover:bg-blue-700 active:scale-[0.98] transition">
+                    class="px-[38px] py-[9px] w-[95px] h-[36px] 
+                    font-inter font-normal text-[15px] leading-none tracking-normal
+                    rounded-[10px] bg-[#03558B] text-white
+                    hover:bg-blue-700 active:scale-[0.98] transition
+                     flex items-center justify-center">
                     Guardar
                 </button>
 
                 <button type="button" id="cancelMarcaBtn"
-                    class="px-5 py-2 text-sm rounded-xl border border-blue-800 text-blue-800 
-                    hover:bg-gray-100 transition">
+                    class="px-[38px] py-[9px] w-[95px] h-[36px] 
+                    font-inter font-normal text-[15px] leading-none tracking-normal
+                    rounded-[10px] border border-blue-800 text-blue-800 
+                    hover:bg-gray-100 transition
+                    flex items-center justify-center">
                     Cancelar
                 </button>
 
@@ -635,7 +640,7 @@
 
     <script>
     // Modal behavior (marca)
-    const openModal = document.getElementById('openModal')
+    const openModal = document.getElementById('toggleFormBtn')
     const modalMarca = document.getElementById('modalMarca')
     const closeMarcaModal = document.getElementById('closeMarcaModal')
     const cancelMarcaBtn = document.getElementById('cancelMarcaBtn')
