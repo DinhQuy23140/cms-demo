@@ -4,21 +4,23 @@
 <meta charset="UTF-8">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-<title>Admin</title>
+<title>Marca</title>
 </head>
 
 <body class="bg-gray-100">
 
 <!-- TOPBAR -->
-<header class="h-14 bg-slate-600 text-white flex items-center px-4">
+<header class="h-[64px] bg-[#03558B99] text-white flex items-center">
 
-    <button id="toggleNav" class="text-xl mr-4">
-        ☰
+    <button id="toggleNav" class="w-[103px] h-[64px] flex items-center justify-center">
+        <img src="{{ asset('images/icon_navbar.png') }}" alt="Menu" class="w-[34px] h-[22.5px]">
     </button>
-    
-    <image src="https://upload.wikimedia.org/wikipedia/commons/0/07/Bitel_logo_transparente.png" alt="Bitel Logo" class="h-8 mr-4">
 
-    <div class="font-bold">Bitel, Techonogia para Todos</div>
+    <img src="{{ asset('images/logo_bitel.png') }}" alt="Bitel Logo" class="w-[97px] h-[40px]">
+
+    <div class="ml-6 text-sm font-semibold">
+        Bitel, Tecnología para Todos
+    </div>
 
 </header>
 
@@ -26,56 +28,28 @@
 <div class="flex h-[calc(100vh-56px)]">
 
 <!-- SIDEBAR -->
-<aside id="sidebar"
-class="w-64  text-black transition-all duration-300">
+<aside id="sidebar" class="w-[329px]  text-black transition-all duration-300">
 
-<ul class="p-2 space-y-2">
+<ul class="relative flex flex-col pt-[30px] pr-[20px] pl-[20px] pb-[30px] space-y-[20px]">
 
-<!-- DASHBOARD -->
-<li class="flex items-center p-3 rounded border border-gray-500 rounded-xl">
+    <li class="flex items-center w-[289px] h-[49px] border border-[#BCBCBC] rounded-[10px] px-[19px] py-[7px] gap-[10px]">
+        <span class="font-inter text-[20px] leading-[100%]">Dashboard</span>
+    </li>
 
-<svg class="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3"/>
-</svg>
+    <li class="flex items-center w-[289px] h-[49px] gap-[10px] px-[10px] py-[7px] rounded-tr-[20px] rounded-br-[20px]">
+        <img src="{{ asset('images/icon_notifi.png') }}" class="w-[24px] h-[24px]">
+        <span class="font-inter text-[20px]">Notificaciones</span>
+    </li>
 
-<span class="ml-3 nav-text">Dashboard</span>
+    <li class="flex items-center w-[289px] h-[49px] gap-[10px] px-[10px] py-[7px] rounded-tr-[20px] rounded-br-[20px]">
+        <img src="{{ asset('images/icon_marca.png') }}" class="w-[24px] h-[24px]">
+        <span class="font-inter text-[20px]">Marca</span>
+    </li>
 
-</li>
-
-<li class="flex items-center p-3 rounded ">
-
-<svg class="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-d="M20 13V7a2 2 0 00-2-2h-3V3H9v2H6a2 2 0 00-2 2v6"/>
-</svg>
-
-<span class="ml-3 nav-text">Notificaciones</span>
-
-</li>
-
-<li class="flex items-center p-3 rounded ">
-
-<svg class="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-d="M3 3h18l-2 13H5L3 3z"/>
-</svg>
-
-<span class="ml-3 nav-text">Marca</span>
-
-</li>
-
-
-<li class="flex items-center p-3 rounded">
-
-<svg class="w-5 h-5 min-w-[20px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-d="M5.121 17.804A4 4 0 019 16h6a4 4 0 013.879 1.804"/>
-</svg>
-
-<span class="ml-3 nav-text">Equipo</span>
-
-</li>
+    <li class="flex items-center w-[289px] h-[49px] gap-[10px] px-[10px] py-[7px] rounded-tr-[20px] rounded-br-[20px]">
+        <img src="{{ asset('images/icon_equipo.png') }}" class="w-[24px] h-[24px]">
+        <span class="font-inter text-[20px]">Equipo</span>
+    </li>
 
 </ul>
 
@@ -83,501 +57,390 @@ d="M5.121 17.804A4 4 0 019 16h6a4 4 0 013.879 1.804"/>
 
 
 <!-- MAIN -->
-<main class="flex-1 p-6">
+<main class="flex-1 pt-[17px] pr-[50px] pb-[17px] pl-[8px] gap-[20px]">
 
-<div class="text-gray-500 mb-4">
-Home / Products
-</div>
+    <div class="font-inter text-[15px] flex items-center gap-[6px]">
+        <a href="#" class="text-[15px] ">
+            Homepage
+        </a>
 
-<div class="flex justify-between mb-4">
+        <img src="{{asset('images/ic_keyboard_arrow_right.png')}}" alt="">
 
-    <h1 class="text-xl font-semibold">
-    Product List
-    </h1>
+        <span class="text-[15px] ">
+            Equipo
+        </span>
+    </div>
 
-    <button id="toggleFormBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-        +  Add
-    </button>
+    <div class="flex items-center justify-between mt-2 mb-4 ">
 
-</div>
+        <h1 class="font-inter text-[20px] font-semibold leading-none">
+            Equipo
+        </h1>
 
-<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+        <button id="toggleFormBtn"
+            class="flex items-center gap-[10px] bg-[#03558B] text-white px-[17px] py-[9px] rounded-[10px] w-[95px] h-[36px]">
 
-<div id="configForm" class="max-w-6xl mx-auto p-6 space-y-8 bg-white rounded-xl shadow max-h-[90vh] overflow-y-auto">
+            <img src="{{ asset('images/icon_add.png') }}" class="w-[10px] h-[10px]" />
 
-    <!-- TITLE -->
-    <h1 class="text-2xl font-bold flex justify-between items-center">
-    Add Config for Device
-    <button id="closeModal" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
-    </h1>
+            <span class="font-inter text-[15px]">
+                Add
+            </span>
 
+        </button>
 
-    <!-- PRODUCT INFORMATION -->
-<div class="bg-gray-50 p-6 rounded-xl shadow space-y-4">
+    </div>
 
-    <h2 class="text-lg font-semibold">Product Information</h2>
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
 
-    <div class="grid grid-cols-2 gap-4">
+        <div id="configForm" class="w-[1126px] h-[841px] px-[37px] py-[15px] flex flex-col gap-[20px] bg-white rounded-[10px]">
 
-        <!-- Product ID -->
-        <div class="flex flex-col space-y-1">
-            <label class="text-sm font-medium text-gray-700">
-                Producto ID
-            </label>
-            <input
-                type="text"
-                placeholder="Enter product ID"
-                class="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-        </div>
+            <!-- TITLE -->
+            <h1 class="font-inter text-[20px] font-semibold leading-none tracking-normal flex justify-between items-center">
+                Add Config for Device
+                <button   button id="closeModal" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
+            </h1>
 
-        <!-- Product Name -->
-        <div class="flex flex-col space-y-1">
-            <label class="text-sm font-medium text-gray-700">
-                Nombre del Producto
-            </label>
-            <input
-                type="text"
-                placeholder="Enter product name"
-                class="border rounded-lg p-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-            >
-        </div>
+            <!-- PRODUCT INFORMATION -->
+            <div class="flex gap-[20px]">
+                <!-- Product ID -->
+                <div class="flex flex-col space-y-1 w-[387px]">
+                    <label class="text-sm font-medium text-gray-700">
+                        Ingresar ID del Producto
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="Enter product ID"
+                        class="w-full border rounded-lg px-3 py-2 font-inter text-sm leading-none placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                </div>
+                <!-- Product Name -->
+                <div class="flex flex-col space-y-1 w-[647px]">
+                    <label class="text-sm font-medium text-gray-700">
+                        Nombre del Producto
+                    </label>
+                    <input
+                        type="text"
+                        placeholder="Enter product name"
+                        class="w-full border rounded-lg px-3 py-2 font-inter text-sm leading-none placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    >
+                </div>
+            </div>
 
-        <!-- Brand -->
-        <div class="flex flex-col space-y-1">
-            <label class="text-sm font-medium text-gray-700">
-                Marca
-            </label>
-
-            <div class="relative">
+            <!-- Brand -->
+            <div class="flex flex-col space-y-1 w-[382px]">
+                <label class="text-sm font-medium text-gray-700">
+                    Marca
+                </label>
+                <div class="relative">
                 <select
-                    class="appearance-none border rounded-lg px-3 py-2 pr-10 w-full bg-white
+                    class="w-full appearance-none border rounded-lg px-3 py-2 pr-10 bg-white h-[41px]
+                        font-inter text-sm font-normal leading-none tracking-normal text-[#666666]
                         focus:outline-none focus:ring-2 focus:ring-blue-400"
                 >
-                    <option value="">Select brand</option>
+                    <option value="">Seleccione Marca</option>
                     <option value="apple">Apple</option>
                     <option value="samsung">Samsung</option>
                     <option value="xiaomi">Xiaomi</option>
                 </select>
-
-                <!-- custom arrow -->
-                <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                    <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 9l-7 7-7-7"/>
-                    </svg>
+                    <!-- custom arrow -->
+                    <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
+
+            <!-- PRODUCT DETAIL -->
+            <div class="rounded-xl flex flex-col gap-[10px]">
+                <div class="flex justify-between items-center">
+                    <h2 class="font-inter text-[23px] font-normal leading-none tracking-normal">
+                        Descripción
+                    </h2>
+
+                    <button id="addDetailBtn"
+                    class="px-[8px] py-[7px] bg-[#03558B] text-white rounded-lg flex gap-[10px] items-center">
+                        <img src="{{ asset('images/icon_add.png') }}" class="w-[10px] h-[10px]" />
+                        <span>Añadir nuevo campo</span>
+                    </button>
+                </div>
+
+                <div class="w-full ">
+
+                    <div class="flex gap-[40px] text-sm">
+                        <div class="w-[25px] text-left">No</div>
+                        <div class="w-[129px] text-left font-inter font-normal text-[16px] leading-[100%] tracking-[0]">Icono</div>
+                        <div class="w-[102px] text-left font-inter font-normal text-[16px] leading-[100%] tracking-[0]">Título</div>
+                        <div class="w-[136px] text-left font-inter font-normal text-[16px] leading-[100%] tracking-[0]">Título Color Texto</div>
+                        <div class="w-[209px] text-left font-inter font-normal text-[16px] leading-[100%] tracking-[0]">Descripción</div>
+                        <div class="w-[113px] text-left font-inter font-normal text-[16px] leading-[100%] tracking-[0]">Descripción Color Texto</div>
+                        <div class="w-[66px] text-left font-inter font-normal text-[16px] leading-[100%] tracking-[0]">Borrar</div>
+                    </div>
+
+                    <div id="detailTableBody">
+
+                        <div class="flex gap-[25px] items-top py-2">
+
+                            <!-- No -->
+                            <input type="number" class="border rounded w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]">
+
+
+                            <!-- Icon -->
+                            <label for="iconUploadDetail1"
+                                class="w-[147px] min-h-[105px] flex flex-col items-center justify-center
+                                border border-[#E8E8E8] rounded-[10px] cursor-pointer
+                                transition relative overflow-hidden gap-[20px]">
+
+                                <img src="{{ asset('images/icon_image.png') }}" class="w-[31.96px] h-[45.22px] text-gray-400">
+
+                                <img id="previewDetail1"
+                                    class="absolute inset-0 w-full h-full object-cover hidden">
+
+                                <input 
+                                    type="file"
+                                    accept="image/*"
+                                    id="iconUploadDetail1"
+                                    class="hidden"
+                                    onchange="previewIcon(event,'previewDetail1')"
+                                >
+                            </label>
+
+
+                            <!-- Title -->
+                            <input type="text" class="border p-1 rounded w-[119px] h-[41px] border border-[#E8E8E8] rounded-[10px]">
+
+
+                            <!-- Title Color -->
+                            <div class="flex items-center gap-[10px] w-[129px] h-[44px] border border-[#E8E8E8] rounded-[10px] bg-gray-50 px-[15px] py-[12px]">
+
+                                <input 
+                                    type="color"
+                                    value="#000000"
+                                    class="w-[22px] h-[22px] rounded-full cursor-pointer"
+                                    oninput="updateColorCode(this)"
+                                >
+
+                                <span class="text-[13px] font-mono text-gray-600 w-[76px] h-[22px]">
+                                    #000000
+                                </span>
+
+                            </div>
+
+
+                            <!-- Description -->
+                            <input type="text" class="border rounded w-[239px] h-[41px] border border-[#E8E8E8] rounded-[10px]">
+
+
+                            <!-- Description Color -->
+                            <div class="flex items-center gap-2 border rounded-md w-[134px] h-[44px] px-[15px] py-[12px]">
+
+                                <input 
+                                    type="color"
+                                    value="#000000"
+                                    class="w-[22px] h-[22px] p-0 border-0 rounded-full cursor-pointer"
+                                    oninput="updateColorCode(this)"
+                                >
+
+                                <span class="text-[13px] font-medium">
+                                    #000000
+                                </span>
+
+                            </div>
+
+
+                            <!-- Delete -->
+                            <img src="{{asset('images/icon_delete.png')}}" alt="" class="w-[14px] h-[18px] cursor-pointer delete-detail-btn">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCT BASE ON COLOR -->
+            <div class="flex flex-col gap-[10px]">
+
+                <div class="flex justify-between items-center">
+
+                    <h2 class="font-inter font-normal text-[23px] leading-[100%] tracking-[0]">
+                        Producto por color
+                    </h2>
+
+                    <button id="addColorBtn"
+                    class="flex gap-[10px] items-center px-[7px] py-[8px] bg-[#03558B] text-white rounded-[10px] hover:bg-blue-600">
+                        <img src="{{ asset('images/icon_add.png') }}" class="w-[10px] h-[10px]" />
+                        <span>Añadir nuevo campo</span>
+                    </button>
+
+                </div>
+
+
+                <div class="flex flex-col gap-[20px]">
+
+                    <div class="flex gap-[40px] w-[1049px]">
+                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[25px] text-[16px] shrink-0">No</div>
+                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[84px] text-[16px] shrink-0">Photo</div>
+                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[88px] text-[16px] shrink-0">Color</div>
+                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[58px] text-[16px] shrink-0">Stock</div>
+                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[107px] text-[16px] shrink-0">Precio original</div>
+                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[106px] text-[16px] shrink-0">Descuento</div>
+                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[116px] text-[15px] shrink-0">URL</div>
+                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[105px] text-[15px] shrink-0">Código del producto en BCCS</div>
+                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[59px] text-[16px] shrink-0">Borrar</div>
+                    </div>
+
+                    <div id="colorTableBody" class="flex flex-col">
+
+                        <div class="flex gap-[23px] w-[1049px]">
+
+                            <div class="">
+                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
+                            </div>
+
+                            <div class="">
+                                <label for="iconUploadColor1"
+                                    class="w-[106px] h-[94px] flex flex-col items-center justify-center gap-[20px]
+                                    border border-[#E8E8E8] rounded-[10px] cursor-pointer
+                                    transition relative overflow-hidden">
+
+                                    <img src="{{ asset('images/icon_image.png') }}" class="w-[33.78px] h-[41.43px] text-gray-400">
+
+                                    <img id="previewColor1"
+                                        class="absolute inset-0 w-full h-full object-cover hidden">
+
+                                    <input 
+                                        type="file"
+                                        accept="image/*"
+                                        id="iconUploadColor1"
+                                        class="hidden box-border"
+                                        onchange="previewIcon(event,'previewColor1')">
+                                </label>
+                            </div>
+
+                            <div class="">
+                                <div class="flex items-center gap-2 px-[15px] py-[10px] border rounded-[10px] w-[108px]">
+                                    <input 
+                                        type="color"
+                                        value="#000000"
+                                        class="w-[22px] h-[22px] rounded-full cursor-pointer box-border"
+                                        oninput="updateColorCode(this)">
+                                    <span class="text-xs font-mono text-gray-600">
+                                        #000000
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="">
+                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[71px] h-[39px] box-border">
+                            </div>
+
+                            <div class="w-[140px]">
+                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+                            </div>
+
+                            <div class="w-[120px]">
+                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[120px] h-[39px] box-border">
+                            </div>
+
+                            <div class="w-[200px]">
+                                <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+                            </div>
+
+                            <div class="w-[200px]">
+                                <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+                            </div>
+
+                            <div class="w-[24px]">
+                                <img src="{{asset('images/icon_delete.png')}}" alt="" class="w-[14px] h-[18px] cursor-pointer delete-color-btn">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SHOW HIDE -->
+            <div class="flex items-center gap-[32px]">
+
+                <span class="font-medium text-center">Estado</span>
+
+                <!-- From Uiverse.io by namecho --> 
+                <label class="switch flex items-center cursor-pointer">
+                <input type="checkbox">
+                <span class="slider"></span>
+                </label>
+            </div>
+
+
+            <!-- SUBMIT -->
+            <div class="flex justify-start gap-[40px]">
+
+                <button
+                class= "flex items-center justify-center w-[95px] h-[36px] bg-[#03558B] border rounded-[10px] text-white px-[38px] py-[9px]">
+                    Guardar
+                </button>
+
+                <button
+                class="flex items-center justify-center w-[95px] h-[36px] border border-[#03558B] text-[#03558B] rounded-[10px] px-[38px] py-[9px]">
+                    Cancel
+                </button>
+
+
+            </div>
+
         </div>
 
     </div>
 
-</div>
+    <div class="bg-white rounded-xl shadow overflow-hidden">
 
+        <table class="w-full table-fixed">
 
-    <!-- PRODUCT DETAIL -->
-    <div class="bg-gray-50 p-6 rounded-xl shadow space-y-4">
+        <tbody>
 
-        <div class="flex justify-between items-center">
-            <h2 class="text-lg font-semibold">Descripción</h2>
+            <tr class="border-[#E8E8E8] rounded-[10px] hover:bg-gray-50 transition">
 
-            <button id="addDetailBtn"
-            class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                + Add Detail
-            </button>
-        </div>
+                <!-- STATUS + VIEW -->
+                <td class="p-4 w-[100px] h-[20px]">
+                    <div class="flex items-center gap-5">
+                        <label class="switch cursor-pointer flex items-center">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
 
-        <table class="w-full border border-gray-200">
+                        <img src="{{ asset('images/icon_fullview.png') }}" class="w-5 h-5">
+                    </div>
+                </td>
 
-            <thead class="bg-gray-100 text-sm">
-                <tr>
-                    <th class="p-2 w-16">No</th>
-                    <th class="p-2">Icon</th>
-                    <th class="p-2">Title</th>
-                    <th class="p-2">Title Color</th>
-                    <th class="p-2">Description</th>
-                    <th class="p-2">Description Color text</th>
-                    <th class="p-2 w-32">Action</th>
-                </tr>
-            </thead>
+                <!-- PRODUCT NAME -->
+                <td class="p-4 text-left text-[13px] font-inter h-[20px]">
+                    Product 1
+                </td>
 
-            <tbody id="detailTableBody">
+                <!-- ACTION -->
+                <td class="px-[12px] w-[120px] h-[25px]">
+                    <div class="flex gap-4 justify-end items-center">
+                        <img src="{{asset('images/icon_edit.png')}}" class="w-[18px] h-[18px]">
+                        <img src="{{asset('images/icon_delete.png')}}" class="w-[24px] h-[24px]">
+                    </div>
+                </td>
 
-                <tr class="border-t">
+            </tr>
 
-                    <td class="p-2 w-16">
-                        <input type="number" class="border p-1 rounded w-full">
-                    </td>
-
-<td class="p-2">
-    <label for="iconUploadDetail1"
-        class="w-20 h-20 mx-auto flex flex-col items-center justify-center 
-        border-2 border-dashed border-gray-200 rounded-xl cursor-pointer
-        hover:border-blue-400 hover:bg-blue-50 transition relative overflow-hidden">
-
-        <!-- Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg"
-            class="w-5 h-5 text-gray-400 group-hover:text-blue-500"
-            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 16l4-4a3 3 0 014 0l4 4m0 0l4-4a3 3 0 014 0l4 4M3 16v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
-        </svg>
-
-        <span class="text-[10px] text-gray-400 mt-1">Upload</span>
-
-        <!-- Preview -->
-        <img id="previewDetail1"
-            class="absolute inset-0 w-full h-full object-cover hidden">
-
-        <!-- Input -->
-        <input 
-            type="file"
-            accept="image/*"
-            id="iconUploadDetail1"
-            class="hidden"
-            onchange="previewIcon(event,'previewDetail1')"
-        >
-    </label>
-</td>
-
-                    <td class="p-2">
-                        <input type="text" class="border p-1 rounded w-full">
-                    </td>
-
-                    <td class="p-2">
-                        <div class="flex items-center gap-2 px-2 py-1 border rounded-md bg-gray-50 w-fit">
-
-                            <!-- Color -->
-                            <input 
-                                type="color"
-                                value="#000000"
-                                class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer"
-                                oninput="updateColorCode(this)"
-                            >
-
-                            <!-- Color Code -->
-                            <span class="text-xs font-mono text-gray-600">
-                                #000000
-                            </span>
-
-                        </div>
-                    </td>
-
-                    <td class="p-2">
-                        <input type="text" class="border p-1 rounded w-full">
-                    </td>
-
-                    <td class="p-2">
-                        <div class="flex items-center gap-2 px-2 py-1 border rounded-md bg-gray-50 w-fit">
-
-                            <!-- Color -->
-                            <input 
-                                type="color"
-                                value="#000000"
-                                class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer"
-                                oninput="updateColorCode(this)"
-                            >
-
-                            <!-- Color Code -->
-                            <span class="text-xs font-mono text-gray-600">
-                                #000000
-                            </span>
-
-                        </div>
-                    </td>
-
-                    <td class="p-2 flex gap-2 justify-end w-32">
-                        <button class="px-3 py-1 mr-2
-                        bg-red-500 text-white
-                        rounded-lg
-                        hover:bg-red-600
-                        transition flex items-center gap-1 delete-detail-btn">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        Delete
-                        </button>
-
-                </tr>
-
-            </tbody>
+        </tbody>
 
         </table>
 
     </div>
-
-
-    <!-- PRODUCT BASE ON COLOR -->
-    <div class="bg-gray-50 p-6 rounded-xl shadow space-y-4">
-
-        <div class="flex justify-between items-center">
-
-            <h2 class="text-lg font-semibold">
-                Product Base On Color
-            </h2>
-
-            <button id="addColorBtn"
-            class="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-                + Add Color
-            </button>
-
-        </div>
-
-
-        <table class="w-full border border-gray-200">
-
-            <thead class="bg-gray-100 text-sm">
-
-                <tr>
-                    <th class="p-2">No</th>
-                    <th class="p-2">Photo</th>
-                    <th class="p-2">Color</th>
-                    <th class="p-2">Stock</th>
-                    <th class="p-2">Origin Price</th>
-                    <th class="p-2">Discount</th>
-                    <th class="p-2">URL</th>
-                    <th class="p-2">Product Code BCCS</th>
-                    <th class="p-2 w-32">Action</th>
-                </tr>
-
-            </thead>
-
-            <tbody id="colorTableBody">
-
-                <tr class="border-t">
-
-                    <td class="p-2 w-16">
-                        <input type="number" class="border p-1 rounded w-full">
-                    </td>
-
-<td class="p-2">
-    <label for="iconUploadColor1"
-        class="w-24 h-24 mx-auto flex flex-col items-center justify-center
-        border-2 border-dashed border-gray-200 rounded-xl cursor-pointer
-        hover:border-blue-400 hover:bg-blue-50 transition relative overflow-hidden">
-
-        <!-- Icon -->
-        <svg xmlns="http://www.w3.org/2000/svg"
-            class="w-6 h-6 text-gray-400"
-            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 16l4-4a3 3 0 014 0l4 4m0 0l4-4a3 3 0 014 0l4 4M3 16v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
-        </svg>
-
-        <span class="text-xs text-gray-400 mt-1">Upload</span>
-
-        <!-- Preview -->
-        <img id="previewColor1"
-            class="absolute inset-0 w-full h-full object-cover hidden">
-
-        <!-- Input -->
-        <input 
-            type="file"
-            accept="image/*"
-            id="iconUploadColor1"
-            class="hidden"
-            onchange="previewIcon(event,'previewColor1')"
-        >
-    </label>
-</td>
-
-                    <td class="p-2">
-                        <div class="flex items-center gap-2 px-2 py-1 border rounded-md bg-gray-50 w-fit">
-
-                            <!-- Color -->
-                            <input 
-                                type="color"
-                                value="#000000"
-                                class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer"
-                                oninput="updateColorCode(this)"
-                            >
-
-                            <!-- Color Code -->
-                            <span class="text-xs font-mono text-gray-600">
-                                #000000
-                            </span>
-
-                        </div>
-                    </td>
-
-                    <td class="p-2">
-                        <input type="number" class="border p-1 rounded w-full">
-                    </td>
-
-                    <td class="p-2">
-                        <input type="number" class="border p-1 rounded w-full">
-                    </td>
-
-                    <td class="p-2">
-                        <input type="number" class="border p-1 rounded w-full">
-                    </td>
-
-                    <td class="p-2">
-                        <input type="text" class="border p-1 rounded w-full">
-                    </td>
-
-                    <td class="p-2">
-                        <input type="text" class="border p-1 rounded w-full">
-                    </td>
-
-                    <td class="p-2 flex gap-2 justify-end w-32">
-                        <button class="px-3 py-1 mr-2
-                        bg-red-500 text-white
-                        rounded-lg
-                        hover:bg-red-600
-                        transition flex items-center gap-1 delete-color-btn">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                        Delete
-                        </button>
-                    </td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-
-    <!-- SHOW HIDE -->
-    <div class="bg-gray-50 p-6 rounded-xl shadow flex items-center">
-
-        <span class="font-medium text-center">Show Product</span>
-
-        <!-- From Uiverse.io by namecho --> 
-        <label class="switch flex items-center cursor-pointer ml-6">
-        <input type="checkbox">
-        <span class="slider"></span>
-        </label>
-
-
-    </div>
-
-
-    <!-- SUBMIT -->
-    <div class="flex justify-start">
-
-        <button
-        class="px-6 py-2 bg-slate-700 text-white rounded-lg
-        hover:bg-gray-600 transition">
-
-            Save Config
-
-        </button>
-
-        <button
-        class="px-6 py-2 text-gray-700 rounded-lg ml-4 border border-slate-500 rounded-px
-        hover:bg-gray-400 transition">
-
-            Cancel
-
-        </button>
-
-
-    </div>
-
-</div>
-
-</div>
-
-<div class="bg-white rounded-xl shadow overflow-hidden">
-
-    <table class="w-full text-left">
-
-    <!-- <thead class="bg-gray-100 text-gray-600 text-sm">
-    <tr>
-    <th class="p-4">Status</th>
-    <th class="p-4">Product</th>
-    <th class="p-4">View</th>
-    <th class="p-4">Action</th>
-    </tr>
-    </thead> -->
-
-    <tbody>
-
-    <tr class="border-t hover:bg-gray-50 transition">
-
-        <!-- STATUS TOGGLE and VIEW -->
-        <td class="p-4 flex items-center gap-4 w-40">
-
-            <label class="relative inline-flex items-center cursor-pointer w-12 justify-center">
-
-            <!-- From Uiverse.io by namecho --> 
-            <label class="switch flex items-center cursor-pointer">
-            <input type="checkbox">
-            <span class="slider"></span>
-            </label>
-
-            </label>
-
-            <button class="w-9 h-9 flex items-center justify-center
-            bg-blue-500 text-white rounded-lg
-            hover:bg-blue-600 hover:scale-110 transition">
-
-                <svg xmlns="http://www.w3.org/2000/svg"
-                    class="w-5 h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor">
-
-                <path stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M8 3H3v5M16 3h5v5M21 16v5h-5M3 16v5h5
-                        M3 3l6 6M21 3l-6 6M3 21l6-6M21 21l-6-6" />
-
-                </svg>
-
-            </button>
-
-        </td>
-
-        <!-- PRODUCT NAME -->
-        <td class="p-4 font-medium text-left w-full">
-        Macbook Pro M3
-        </td>
-
-
-        <!-- ACTION -->
-        <td class="p-2 flex gap-2 justify-end">
-
-            <button class="px-3 py-1
-            bg-yellow-400
-            rounded-lg
-            hover:bg-yellow-500
-            transition flex items-center gap-1">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                </svg>
-            Edit
-            </button>
-
-            <button class="px-3 py-1 mr-2
-            bg-red-500 text-white
-            rounded-lg
-            hover:bg-red-600
-            transition flex items-center gap-1">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                </svg>
-            Delete
-            </button>
-
-        </td>
-
-    </tr>
-
-    </tbody>
-
-    </table>
-
-</div>
-
-
 
 </main>
 
@@ -590,18 +453,18 @@ const toggle = document.getElementById("toggleNav")
 const sidebar = document.getElementById("sidebar")
 const texts = document.querySelectorAll(".nav-text")
 
-toggle.onclick = () => {
+// toggle.onclick = () => {
 
-sidebar.classList.toggle("w-56")
-sidebar.classList.toggle("w-16")
+// sidebar.classList.toggle("w-56")
+// sidebar.classList.toggle("w-16")
 
-texts.forEach(text => {
+// texts.forEach(text => {
 
-text.classList.toggle("hidden")
+// text.classList.toggle("hidden")
 
-})
+// })
 
-}
+// }
 
 const toggleBtn = document.getElementById("toggleFormBtn");
 const modal = document.getElementById("modal");
