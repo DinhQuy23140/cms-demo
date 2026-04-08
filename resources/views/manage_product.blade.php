@@ -495,8 +495,15 @@ function previewIcon(event, previewId){
             return;
         }
         const preview = document.getElementById(previewId);
+        const iconImg = preview.previousElementSibling;
+        
         preview.src = URL.createObjectURL(file);
         preview.classList.remove("hidden");
+        
+        // Hide the default icon when image is selected
+        if (iconImg && iconImg.tagName === 'IMG') {
+            iconImg.classList.add("hidden");
+        }
     }
 }
 
