@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/cms/cms_v2/style.css') }}">
 <title>Marca</title>
 </head>
 
@@ -14,10 +15,10 @@
     <header class="h-[64px] bg-[#03558B99] text-white flex items-center">
 
         <button id="toggleNav" class="w-[103px] h-[64px] flex items-center justify-center">
-            <img src="{{ asset('images/icon_navbar.png') }}" alt="Menu" class="w-[34px] h-[22.5px]">
+            <img src="{{ asset('images/cms/icon_cms_v2/icon_navbar.png') }}" alt="Menu" class="w-[34px] h-[22.5px]">
         </button>
 
-        <img src="{{ asset('images/logo_bitel.png') }}" alt="Bitel Logo" class="w-[97px] h-[40px]">
+        <img src="{{ asset('images/cms/icon_cms_v2/logo_bitel.png') }}" alt="Bitel Logo" class="w-[97px] h-[40px]">
 
         <div class="ml-6 text-sm font-semibold">
             Bitel, Tecnología para Todos
@@ -37,19 +38,25 @@
                     <span class="font-inter text-[20px] leading-[100%]">Dashboard</span>
                 </li>
 
-                <li class="flex items-center w-[289px] h-[49px] gap-[10px] px-[10px] py-[7px] rounded-tr-[20px] rounded-br-[20px]">
-                    <img src="{{ asset('images/icon_notifi.png') }}" class="w-[24px] h-[24px]">
-                    <span class="font-inter text-[20px]">Notificaciones</span>
+                <li class="flex items-center w-[289px] h-[49px] px-[10px] py-[7px] rounded-tr-[20px] rounded-br-[20px]">
+                    <a href="" class="flex items-center gap-[10px]">
+                        <img src="{{ asset('images/cms/icon_cms_v2/icon_notifi.png') }}" class="w-[24px] h-[24px]">
+                        <span class="font-inter text-[20px]">Notificaciones</span>
+                    </a>
                 </li>
 
                 <li class="flex items-center w-[289px] h-[49px] gap-[10px] px-[10px] py-[7px] rounded-tr-[20px] rounded-br-[20px]">
-                    <img src="{{ asset('images/icon_marca.png') }}" class="w-[24px] h-[24px]">
-                    <span class="font-inter text-[20px]">Marca</span>
+                    <a href="{{ route('cms.marca.dashboard') }}" class="flex items-center gap-[10px]">
+                        <img src="{{ asset('images/cms/icon_cms_v2/icon_marca.png') }}" class="w-[24px] h-[24px]">
+                        <span class="font-inter text-[20px]">Marca</span>
+                    </a>
                 </li>
 
                 <li class="flex items-center w-[289px] h-[49px] gap-[10px] px-[10px] py-[7px] rounded-tr-[20px] rounded-br-[20px]">
-                    <img src="{{ asset('images/icon_equipo.png') }}" class="w-[24px] h-[24px]">
-                    <span class="font-inter text-[20px]">Equipo</span>
+                    <a href="{{ route('cms.device.dashboard') }}" class="flex items-center gap-[10px]">
+                        <img src="{{ asset('images/cms/icon_cms_v2/icon_equipo.png') }}" class="w-[24px] h-[24px]">
+                        <span class="font-inter text-[20px]">Equipo</span>
+                    </a>
                 </li>
 
             </ul>
@@ -65,7 +72,7 @@
                     Homepage
                 </a>
 
-                <img src="{{asset('images/ic_keyboard_arrow_right.png')}}" alt="">
+                <img src="{{asset('images/cms/icon_cms_v2/ic_keyboard_arrow_right.png')}}" alt="">
 
                 <span class="text-[15px] ">
                     Marca
@@ -81,7 +88,7 @@
                 <button id="toggleFormBtn"
                     class="flex items-center gap-[10px] bg-[#03558B] text-white px-[17px] py-[9px] rounded-[10px] w-[95px] h-[36px]">
 
-                    <img src="{{ asset('images/icon_add.png') }}" class="w-[10px] h-[10px]" />
+                    <img src="{{ asset('images/cms/icon_cms_v2/icon_add.png') }}" class="w-[10px] h-[10px]" />
 
                     <span class="font-inter text-[15px]">
                         Add
@@ -471,45 +478,63 @@
 
             </div>
 
-            <div class="bg-white rounded-xl shadow overflow-hidden">
+            <div id="modalConfirmDelete" class="fixed inset-0 hidden bg-black bg-opacity-50 z-50 flex items-center justify-center">
+                <div class="bg-white rounded-lg px-[21px] py-[19px]">
+                    <div class="w-[330px] flex flex-col items-center gap-[7px]">
+                        <img src="{{ asset('images/cms/icon_cms_v2/icon_question.png') }}" class="w-[60px] h-[60px]">
+                        <h2 class="font-inter font-semibold text-[18px] leading-[28px] tracking-normal text-center align-middle">¿Eliminar este elemento?</h2>
+                        <p class="font-inter font-normal text-[14px] leading-[20px] tracking-normal text-center">¿Estás seguro de que deseas eliminar este</br> elemento? Una vez eliminado, no se podrá</br> recuperar.</p>
+                        <div class="flex justify-end gap-4">
+                            <button id="confirmDeleteBtn" class="flex items-center w-[128px] h-[36px] px-[24px] py-[17px] bg-[#9F5ED9] text-white rounded-[10px]">CONTINUAR</button>
+                            <button id="cancelDeleteBtn" class="flex items-center w-[128px] h-[36px] px-[24px] py-[17px] border border-[#666666] rounded-[10px]">CANCELAR </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                <table class="w-full table-fixed">
+            <div class="overflow-hidden">
 
-                <tbody>
+                <div class="w-full flex flex-col gap-[20px]">
 
-                    <tr class="border-[#E8E8E8] rounded-[10px] hover:bg-gray-50 transition">
+                    @foreach($brands as $brand)
+                        <div class="flex items-center border border-[#E8E8E8] rounded-[10px] hover:bg-gray-50 transition">
 
-                        <!-- STATUS + VIEW -->
-                        <td class="p-4 w-[100px] h-[20px]">
-                            <div class="flex items-center gap-5">
-                                <label class="switch cursor-pointer flex items-center">
-                                    <input type="checkbox">
-                                    <span class="slider"></span>
-                                </label>
+                            <div class="p-4 w-[100px]">
+                                <div class="flex items-center gap-5">
 
-                                <img src="{{ asset('images/icon_fullview.png') }}" class="w-5 h-5">
+                                    <label class="switch cursor-pointer flex items-center">
+                                        <input type="checkbox"
+                                        {{ $brand->active == 1 ? 'checked' : '' }}>
+                                        <span class="slider"></span>
+                                    </label>
+
+                                    <img src="{{ asset('images/cms/icon_cms_v2/icon_fullview.png') }}" class="w-5 h-5">
+
+                                </div>
                             </div>
-                        </td>
 
-                        <!-- PRODUCT NAME -->
-                        <td class="p-4 text-left text-[13px] font-inter h-[20px]">
-                            Marca 1
-                        </td>
-
-                        <!-- ACTION -->
-                        <td class="px-[12px] w-[120px] h-[25px]">
-                            <div class="flex gap-4 justify-end items-center">
-                                <img src="{{asset('images/icon_edit.png')}}" class="w-[18px] h-[18px]">
-                                <img src="{{asset('images/icon_delete.png')}}" class="w-[24px] h-[24px]">
+                            <div class="flex-1 p-4 text-left text-[13px] font-inter">
+                                {{$brand->brand_name}}
                             </div>
-                        </td>
 
-                    </tr>
+                            <div class="px-[12px] w-[120px]">
+                                <div class="flex gap-4 justify-end items-center">
 
-                </tbody>
+                                    <img src="{{asset('images/cms/icon_cms_v2/icon_edit.png')}}" class="w-[18px] h-[18px]">
 
-                </table>
+                                    <img src="{{asset('images/cms/icon_cms_v2/icon_delete.png')}}" class="w-[24px] h-[24px] deleteBtn" data-id="{{$brand->brand_id}}">
 
+                                </div>
+                            </div>
+
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+
+            <div class="flex gap-2 items-center justify-center py-4">
+                {{ $brands->links('pagination::bootstrap-4') }}
             </div>
 
         </main>
@@ -642,15 +667,36 @@
     // Modal behavior (marca)
     const openModal = document.getElementById('toggleFormBtn')
     const modalMarca = document.getElementById('modalMarca')
+    const modalDelete = document.getElementById('modalConfirmDelete')
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn')
+    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn')
     const closeMarcaModal = document.getElementById('closeMarcaModal')
     const cancelMarcaBtn = document.getElementById('cancelMarcaBtn')
     const marcaFormElem = document.getElementById('marcaFormElem')
     const toggleSwitch = document.getElementById('toggleSwitch')
     const marcaTrack = document.getElementById('marcaTrack')
     const marcaDot = document.getElementById('marcaDot')
+    const deleteBtns = document.querySelectorAll('.deleteBtn')
 
     const openMarca = () => modalMarca.classList.remove('hidden')
     const closeMarca = () => modalMarca.classList.add('hidden')
+
+    deleteBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const brandId = btn.getAttribute('data-id')
+            console.log('Delete brand with ID:', brandId)
+            modalDelete.classList.remove('hidden')
+        })
+    })
+
+    confirmDeleteBtn && confirmDeleteBtn.addEventListener('click', () => {
+        console.log('Confirmed delete')
+        modalDelete.classList.add('hidden')
+    })
+
+    cancelDeleteBtn && cancelDeleteBtn.addEventListener('click', () => {
+        modalDelete.classList.add('hidden')
+    })
 
     openModal && openModal.addEventListener('click', openMarca)
     closeMarcaModal && closeMarcaModal.addEventListener('click', closeMarca)
