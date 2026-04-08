@@ -203,7 +203,6 @@
                                     accept="image/*"
                                     id="iconUploadDetail1"
                                     class="hidden"
-                                    onchange="previewIcon(event,'previewDetail1')"
                                 >
                             </label>
 
@@ -218,8 +217,8 @@
                                 <input 
                                     type="color"
                                     value="#000000"
-                                    class="w-[22px] h-[22px] rounded-full cursor-pointer"
-                                    oninput="updateColorCode(this)"
+                                    class="w-[22px] h-[22px] rounded-full cursor-pointer color-input"
+                                    data-color-span="true"
                                 >
 
                                 <span class="text-[13px] font-mono text-gray-600 w-[76px] h-[22px]">
@@ -239,8 +238,8 @@
                                 <input 
                                     type="color"
                                     value="#000000"
-                                    class="w-[22px] h-[22px] p-0 border-0 rounded-full cursor-pointer"
-                                    oninput="updateColorCode(this)"
+                                    class="w-[22px] h-[22px] p-0 border-0 rounded-full cursor-pointer color-input"
+                                    data-color-span="true"
                                 >
 
                                 <span class="text-[13px] font-medium">
@@ -317,8 +316,7 @@
                                         type="file"
                                         accept="image/*"
                                         id="iconUploadColor1"
-                                        class="hidden box-border"
-                                        onchange="previewIcon(event,'previewColor1')">
+                                        class="hidden box-border">
                                 </label>
                             </div>
 
@@ -327,8 +325,8 @@
                                     <input 
                                         type="color"
                                         value="#000000"
-                                        class="w-[22px] h-[22px] rounded-full cursor-pointer box-border"
-                                        oninput="updateColorCode(this)">
+                                        class="w-[22px] h-[22px] rounded-full cursor-pointer box-border color-input"
+                                        data-color-span="true">
                                     <span class="text-xs font-mono text-gray-600">
                                         #000000
                                     </span>
@@ -518,103 +516,135 @@ if (addDetailBtn && detailTableBody) {
     detailTableBody.addEventListener("click", (event) => {
         const deleteButton = event.target.closest(".delete-detail-btn");
         if (deleteButton) {
-            const row = deleteButton.closest("tr");
+            const row = deleteButton.closest(".flex");
             if (row) {
                 row.remove();
             }
         }
     });
+    
+    // Add event listener to initial row
+    const initialDetailRow = detailTableBody.querySelector(".flex");
+    if (initialDetailRow) {
+        const detailFileInput = initialDetailRow.querySelector('#iconUploadDetail1');
+        if (detailFileInput) {
+            detailFileInput.addEventListener('change', function(event) {
+                previewIcon(event, 'previewDetail1');
+            });
+        }
+        
+        const detailColorInputs = initialDetailRow.querySelectorAll('.color-input');
+        detailColorInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                updateColorCode(this);
+            });
+        });
+    }
 }
 
 function addDetailRow() {
     const uniqueId = Date.now() + Math.random().toString(36).substr(2, 9);
     const iconUploadId = 'iconUploadDetail' + uniqueId;
     const previewId = 'previewDetail' + uniqueId;
-const row = document.createElement("div");
+    const row = document.createElement("div");
 
-row.className = "flex gap-[25px] items-start py-2";
+    row.className = "flex gap-[25px] items-start py-2";
 
-row.innerHTML = `
-    <!-- No -->
-    <input 
-        type="number"
-        class="w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
-    >
-
-    <!-- Icon -->
-    <label for="iconUploadDetail1"
-        class="w-[147px] min-h-[105px] flex flex-col items-center justify-center
-        border border-[#E8E8E8] rounded-[10px] cursor-pointer
-        transition relative overflow-hidden gap-[20px]">
-
-        <img src="{{ asset('images/icon_image.png') }}"
-             class="w-[31.96px] h-[45.22px]">
-
-        <img id="previewDetail1"
-             class="absolute inset-0 w-full h-full object-cover hidden">
-
+    row.innerHTML = `
+        <!-- No -->
         <input 
-            type="file"
-            accept="image/*"
-            id="iconUploadDetail1"
-            class="hidden"
-            onchange="previewIcon(event,'previewDetail1')"
+            type="number"
+            class="w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
         >
-    </label>
 
-    <!-- Title -->
-    <input
-        type="text"
-        class="w-[119px] h-[41px] border border-[#E8E8E8] rounded-[10px] p-1"
-    >
+        <!-- Icon -->
+        <label for="${iconUploadId}"
+            class="w-[147px] min-h-[105px] flex flex-col items-center justify-center
+            border border-[#E8E8E8] rounded-[10px] cursor-pointer
+            transition relative overflow-hidden gap-[20px]">
 
-    <!-- Title Color -->
-    <div class="flex items-center gap-[10px] w-[129px] h-[44px]
-        border border-[#E8E8E8] rounded-[10px] bg-gray-50 px-[15px] py-[12px]">
+            <img src="{{ asset('images/icon_image.png') }}"
+                 class="w-[31.96px] h-[45.22px]">
 
+            <img id="${previewId}"
+                 class="absolute inset-0 w-full h-full object-cover hidden">
+
+            <input 
+                type="file"
+                accept="image/*"
+                id="${iconUploadId}"
+                class="hidden"
+            >
+        </label>
+
+        <!-- Title -->
         <input
-            type="color"
-            value="#000000"
-            class="w-[22px] h-[22px] rounded-full cursor-pointer"
-            oninput="updateColorCode(this)"
+            type="text"
+            class="w-[119px] h-[41px] border border-[#E8E8E8] rounded-[10px] p-1"
         >
 
-        <span class="text-[13px] font-mono text-gray-600 w-[76px]">
-            #000000
-        </span>
+        <!-- Title Color -->
+        <div class="flex items-center gap-[10px] w-[129px] h-[44px]
+            border border-[#E8E8E8] rounded-[10px] bg-gray-50 px-[15px] py-[12px]">
 
-    </div>
+            <input
+                type="color"
+                value="#000000"
+                class="w-[22px] h-[22px] rounded-full cursor-pointer color-input"
+                data-color-span="true"
+            >
 
-    <!-- Description -->
-    <input
-        type="text"
-        class="w-[239px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
-    >
+            <span class="text-[13px] font-mono text-gray-600 w-[76px]">
+                #000000
+            </span>
 
-    <!-- Description Color -->
-    <div class="flex items-center gap-2 border border-[#E8E8E8]
-        rounded-[10px] w-[134px] h-[44px] px-[15px] py-[12px]">
+        </div>
 
+        <!-- Description -->
         <input
-            type="color"
-            value="#000000"
-            class="w-[22px] h-[22px] rounded-full cursor-pointer"
-            oninput="updateColorCode(this)"
+            type="text"
+            class="w-[239px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
         >
 
-        <span class="text-[13px] font-medium">
-            #000000
-        </span>
+        <!-- Description Color -->
+        <div class="flex items-center gap-2 border border-[#E8E8E8]
+            rounded-[10px] w-[134px] h-[44px] px-[15px] py-[12px]">
 
-    </div>
+            <input
+                type="color"
+                value="#000000"
+                class="w-[22px] h-[22px] rounded-full cursor-pointer color-input"
+                data-color-span="true"
+            >
 
-    <!-- Delete -->
-    <img
-        src="{{asset('images/icon_delete.png')}}"
-        class="w-[14px] h-[18px] cursor-pointer delete-detail-btn"
-    >
-`;
+            <span class="text-[13px] font-medium">
+                #000000
+            </span>
+
+        </div>
+
+        <!-- Delete -->
+        <img
+            src="{{asset('images/icon_delete.png')}}"
+            class="w-[14px] h-[18px] cursor-pointer delete-detail-btn"
+        >
+    `;
+    
     detailTableBody.appendChild(row);
+    
+    // Add event listener to file input
+    const fileInput = row.querySelector(`#${iconUploadId}`);
+    fileInput.addEventListener('change', function(event) {
+        previewIcon(event, previewId);
+    });
+    
+    // Add event listeners to color inputs
+    const colorInputs = row.querySelectorAll('.color-input');
+    colorInputs.forEach(input => {
+        input.addEventListener('input', function() {
+            updateColorCode(this);
+        });
+    });
 }
 const addColorBtn = document.getElementById("addColorBtn");
 const colorTableBody = document.getElementById("colorTableBody");
@@ -627,12 +657,30 @@ if (addColorBtn && colorTableBody) {
     colorTableBody.addEventListener("click", (event) => {
         const deleteButton = event.target.closest(".delete-color-btn");
         if (deleteButton) {
-            const row = deleteButton.closest("tr");
+            const row = deleteButton.closest(".flex");
             if (row) {
                 row.remove();
             }
         }
     });
+    
+    // Add event listener to initial row
+    const initialColorRow = colorTableBody.querySelector(".flex");
+    if (initialColorRow) {
+        const colorFileInput = initialColorRow.querySelector('#iconUploadColor1');
+        if (colorFileInput) {
+            colorFileInput.addEventListener('change', function(event) {
+                previewIcon(event, 'previewColor1');
+            });
+        }
+        
+        const colorColorInput = initialColorRow.querySelector('.color-input');
+        if (colorColorInput) {
+            colorColorInput.addEventListener('input', function() {
+                updateColorCode(this);
+            });
+        }
+    }
 }
 
 function addColorRow() {
@@ -642,70 +690,80 @@ function addColorRow() {
     const row = document.createElement("div");
     row.className = "flex gap-[23px] w-[1049px]";
     row.innerHTML = `
+        <div class="">
+            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
+        </div>
 
-                            <div class="">
-                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
-                            </div>
+        <div class="">
+            <label for="${iconUploadId}"
+                class="w-[106px] h-[94px] flex flex-col items-center justify-center gap-[20px]
+                border border-[#E8E8E8] rounded-[10px] cursor-pointer
+                transition relative overflow-hidden">
 
-                            <div class="">
-                                <label for="iconUploadColor1"
-                                    class="w-[106px] h-[94px] flex flex-col items-center justify-center gap-[20px]
-                                    border border-[#E8E8E8] rounded-[10px] cursor-pointer
-                                    transition relative overflow-hidden">
+                <img src="{{ asset('images/icon_image.png') }}" class="w-[33.78px] h-[41.43px] text-gray-400">
 
-                                    <img src="{{ asset('images/icon_image.png') }}" class="w-[33.78px] h-[41.43px] text-gray-400">
+                <img id="${previewId}"
+                    class="absolute inset-0 w-full h-full object-cover hidden">
 
-                                    <img id="previewColor1"
-                                        class="absolute inset-0 w-full h-full object-cover hidden">
+                <input 
+                    type="file"
+                    accept="image/*"
+                    id="${iconUploadId}"
+                    class="hidden box-border">
+            </label>
+        </div>
 
-                                    <input 
-                                        type="file"
-                                        accept="image/*"
-                                        id="iconUploadColor1"
-                                        class="hidden box-border"
-                                        onchange="previewIcon(event,'previewColor1')">
-                                </label>
-                            </div>
+        <div class="">
+            <div class="flex items-center gap-2 px-[15px] py-[10px] border rounded-[10px] w-[108px]">
+                <input 
+                    type="color"
+                    value="#000000"
+                    class="w-[22px] h-[22px] rounded-full cursor-pointer box-border color-input"
+                    data-color-span="true">
+                <span class="text-xs font-mono text-gray-600">
+                    #000000
+                </span>
+            </div>
+        </div>
 
-                            <div class="">
-                                <div class="flex items-center gap-2 px-[15px] py-[10px] border rounded-[10px] w-[108px]">
-                                    <input 
-                                        type="color"
-                                        value="#000000"
-                                        class="w-[22px] h-[22px] rounded-full cursor-pointer box-border"
-                                        oninput="updateColorCode(this)">
-                                    <span class="text-xs font-mono text-gray-600">
-                                        #000000
-                                    </span>
-                                </div>
-                            </div>
+        <div class="">
+            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[71px] h-[39px] box-border">
+        </div>
 
-                            <div class="">
-                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[71px] h-[39px] box-border">
-                            </div>
+        <div class="w-[140px]">
+            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+        </div>
 
-                            <div class="w-[140px]">
-                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
-                            </div>
+        <div class="w-[120px]">
+            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[120px] h-[39px] box-border">
+        </div>
 
-                            <div class="w-[120px]">
-                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[120px] h-[39px] box-border">
-                            </div>
+        <div class="w-[200px]">
+            <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+        </div>
 
-                            <div class="w-[200px]">
-                                <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
-                            </div>
+        <div class="w-[200px]">
+            <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+        </div>
 
-                            <div class="w-[200px]">
-                                <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
-                            </div>
-
-                            <div class="w-[24px]">
-                                <img src="{{asset('images/icon_delete.png')}}" alt="" class="w-[14px] h-[18px] cursor-pointer delete-color-btn">
-                            </div>
-
+        <div class="w-[24px]">
+            <img src="{{asset('images/icon_delete.png')}}" alt="" class="w-[14px] h-[18px] cursor-pointer delete-color-btn">
+        </div>
     `;
+    
     colorTableBody.appendChild(row);
+    
+    // Add event listener to file input
+    const fileInput = row.querySelector(`#${iconUploadId}`);
+    fileInput.addEventListener('change', function(event) {
+        previewIcon(event, previewId);
+    });
+    
+    // Add event listener to color input
+    const colorInput = row.querySelector('.color-input');
+    colorInput.addEventListener('input', function() {
+        updateColorCode(this);
+    });
 }
 
 </script>
