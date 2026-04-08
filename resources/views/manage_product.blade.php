@@ -92,11 +92,11 @@
 
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
 
-        <div id="configForm" class="w-[1126px] h-[841px] px-[37px] py-[15px] flex flex-col gap-[20px] bg-white rounded-[10px]">
+        <div id="configForm" class="w-[1126px] h-[841px] px-[37px] py-[15px] flex flex-col gap-[20px] bg-white rounded-[10px] overflow-y-auto">
 
             <!-- TITLE -->
             <h1 class="font-inter text-[20px] font-semibold leading-none tracking-normal flex justify-between items-center">
-                Add Config for Device
+                Agregar nuevo Equipo
                 <button   button id="closeModal" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
             </h1>
 
@@ -105,11 +105,11 @@
                 <!-- Product ID -->
                 <div class="flex flex-col space-y-1 w-[387px]">
                     <label class="text-sm font-medium text-gray-700">
-                        Ingresar ID del Producto
+                        Producto ID
                     </label>
                     <input
                         type="text"
-                        placeholder="Enter product ID"
+                        placeholder="Ingresar ID del Producto"
                         class="w-full border rounded-lg px-3 py-2 font-inter text-sm leading-none placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-blue-400"
                     />
                 </div>
@@ -120,7 +120,7 @@
                     </label>
                     <input
                         type="text"
-                        placeholder="Enter product name"
+                        placeholder="Ingresar nombre del producto"
                         class="w-full border rounded-lg px-3 py-2 font-inter text-sm leading-none placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-blue-400"
                     >
                 </div>
@@ -284,7 +284,7 @@
 
                     <div class="flex gap-[40px] w-[1049px]">
                         <div class="font-inter font-normal leading-[100%] tracking-normal w-[25px] text-[16px] shrink-0">No</div>
-                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[84px] text-[16px] shrink-0">Photo</div>
+                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[84px] text-[16px] shrink-0">Image</div>
                         <div class="font-inter font-normal leading-[100%] tracking-normal w-[88px] text-[16px] shrink-0">Color</div>
                         <div class="font-inter font-normal leading-[100%] tracking-normal w-[58px] text-[16px] shrink-0">Stock</div>
                         <div class="font-inter font-normal leading-[100%] tracking-normal w-[107px] text-[16px] shrink-0">Precio original</div>
@@ -294,7 +294,7 @@
                         <div class="font-inter font-normal leading-[100%] tracking-normal w-[59px] text-[16px] shrink-0">Borrar</div>
                     </div>
 
-                    <div id="colorTableBody" class="flex flex-col">
+                    <div id="colorTableBody" class="flex flex-col gap-[10px]">
 
                         <div class="flex gap-[23px] w-[1049px]">
 
@@ -530,48 +530,90 @@ function addDetailRow() {
     const uniqueId = Date.now() + Math.random().toString(36).substr(2, 9);
     const iconUploadId = 'iconUploadDetail' + uniqueId;
     const previewId = 'previewDetail' + uniqueId;
-    const row = document.createElement("tr");
-    row.className = "border-t detail-row";
-    row.innerHTML = `
-        <td class="p-2 w-16 text-center text-sm text-gray-600">
-            <span>-</span>
-        </td>
-        <td class="p-2 w-32 h-32 flex items-center justify-center border rounded mx-auto my-2 relative">
-            <input type="file" accept="image/*" id="${iconUploadId}" class="hidden" onchange="previewIcon(event,'${previewId}')">
-            <label for="${iconUploadId}" class="cursor-pointer flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500 hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 16l4-4a3 3 0 014 0l4 4m0 0l4-4a3 3 0 014 0l4 4M3 16v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
-                </svg>
-            </label>
-            <img id="${previewId}" class="mt-2 h-8 hidden">
-        </td>
-        <td class="p-2">
-            <input type="text" class="border p-1 rounded w-full">
-        </td>
-        <td class="p-2">
-            <div class="flex items-center gap-2 px-2 py-1 border rounded-md bg-gray-50 w-fit">
-                <input type="color" value="#000000" class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer" oninput="updateColorCode(this)">
-                <span class="text-xs font-mono text-gray-600">#000000</span>
-            </div>
-        </td>
-        <td class="p-2">
-            <input type="text" class="border p-1 rounded w-full">
-        </td>
-        <td class="p-2">
-            <div class="flex items-center gap-2 px-2 py-1 border rounded-md bg-gray-50 w-fit">
-                <input type="color" value="#000000" class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer" oninput="updateColorCode(this)">
-                <span class="text-xs font-mono text-gray-600">#000000</span>
-            </div>
-        </td>
-        <td class="p-2 flex gap-2 justify-end w-32">
-            <button type="button" class="px-3 py-1 mr-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition flex items-center gap-1 delete-detail-btn">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                </svg>
-                Delete
-            </button>
-        </td>
-    `;
+const row = document.createElement("div");
+
+row.className = "flex gap-[25px] items-start py-2";
+
+row.innerHTML = `
+    <!-- No -->
+    <input 
+        type="number"
+        class="w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
+    >
+
+    <!-- Icon -->
+    <label for="iconUploadDetail1"
+        class="w-[147px] min-h-[105px] flex flex-col items-center justify-center
+        border border-[#E8E8E8] rounded-[10px] cursor-pointer
+        transition relative overflow-hidden gap-[20px]">
+
+        <img src="{{ asset('images/icon_image.png') }}"
+             class="w-[31.96px] h-[45.22px]">
+
+        <img id="previewDetail1"
+             class="absolute inset-0 w-full h-full object-cover hidden">
+
+        <input 
+            type="file"
+            accept="image/*"
+            id="iconUploadDetail1"
+            class="hidden"
+            onchange="previewIcon(event,'previewDetail1')"
+        >
+    </label>
+
+    <!-- Title -->
+    <input
+        type="text"
+        class="w-[119px] h-[41px] border border-[#E8E8E8] rounded-[10px] p-1"
+    >
+
+    <!-- Title Color -->
+    <div class="flex items-center gap-[10px] w-[129px] h-[44px]
+        border border-[#E8E8E8] rounded-[10px] bg-gray-50 px-[15px] py-[12px]">
+
+        <input
+            type="color"
+            value="#000000"
+            class="w-[22px] h-[22px] rounded-full cursor-pointer"
+            oninput="updateColorCode(this)"
+        >
+
+        <span class="text-[13px] font-mono text-gray-600 w-[76px]">
+            #000000
+        </span>
+
+    </div>
+
+    <!-- Description -->
+    <input
+        type="text"
+        class="w-[239px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
+    >
+
+    <!-- Description Color -->
+    <div class="flex items-center gap-2 border border-[#E8E8E8]
+        rounded-[10px] w-[134px] h-[44px] px-[15px] py-[12px]">
+
+        <input
+            type="color"
+            value="#000000"
+            class="w-[22px] h-[22px] rounded-full cursor-pointer"
+            oninput="updateColorCode(this)"
+        >
+
+        <span class="text-[13px] font-medium">
+            #000000
+        </span>
+
+    </div>
+
+    <!-- Delete -->
+    <img
+        src="{{asset('images/icon_delete.png')}}"
+        class="w-[14px] h-[18px] cursor-pointer delete-detail-btn"
+    >
+`;
     detailTableBody.appendChild(row);
 }
 const addColorBtn = document.getElementById("addColorBtn");
@@ -597,50 +639,71 @@ function addColorRow() {
     const uniqueId = Date.now() + Math.random().toString(36).substr(2, 9);
     const iconUploadId = 'iconUploadColor' + uniqueId;
     const previewId = 'previewColor' + uniqueId;
-    const row = document.createElement("tr");
-    row.className = "border-t color-row";
+    const row = document.createElement("div");
+    row.className = "flex gap-[23px] w-[1049px]";
     row.innerHTML = `
-        <td class="p-2 w-16">
-            <input type="number" class="border p-1 rounded w-full">
-        </td>
-        <td class="p-2 w-32 h-32 flex items-center justify-center border rounded mx-auto my-2 relative">
-            <input type="file" accept="image/*" id="${iconUploadId}" class="hidden" onchange="previewIcon(event,'${previewId}')">
-            <label for="${iconUploadId}" class="cursor-pointer flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-500 hover:text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 16l4-4a3 3 0 014 0l4 4m0 0l4-4a3 3 0 014 0l4 4M3 16v2a2 2 0 002 2h14a2 2 0 002-2v-2" />
-                </svg>
-            </label>
-            <img id="${previewId}" class="mt-2 h-8 hidden">
-        </td>
-        <td class="p-2">
-            <div class="flex items-center gap-2 px-2 py-1 border rounded-md bg-gray-50 w-fit">
-                <input type="color" value="#000000" class="w-5 h-5 p-0 border-0 rounded-full cursor-pointer" oninput="updateColorCode(this)">
-                <span class="text-xs font-mono text-gray-600">#000000</span>
-            </div>
-        </td>
-        <td class="p-2">
-            <input type="number" class="border p-1 rounded w-full" placeholder="Stock">
-        </td>
-        <td class="p-2">
-            <input type="number" class="border p-1 rounded w-full" placeholder="Origin Price">
-        </td>
-        <td class="p-2">
-            <input type="number" class="border p-1 rounded w-full" placeholder="Discount">
-        </td>
-        <td class="p-2">
-            <input type="text" class="border p-1 rounded w-full" placeholder="URL">
-        </td>
-        <td class="p-2">
-            <input type="text" class="border p-1 rounded w-full" placeholder="Product Code BCCS">
-        </td>
-        <td class="p-2 flex gap-2 justify-end w-32">
-            <button type="button" class="px-3 py-1 mr-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition flex items-center gap-1 delete-color-btn">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                </svg>
-                Delete
-            </button>
-        </td>
+
+                            <div class="">
+                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
+                            </div>
+
+                            <div class="">
+                                <label for="iconUploadColor1"
+                                    class="w-[106px] h-[94px] flex flex-col items-center justify-center gap-[20px]
+                                    border border-[#E8E8E8] rounded-[10px] cursor-pointer
+                                    transition relative overflow-hidden">
+
+                                    <img src="{{ asset('images/icon_image.png') }}" class="w-[33.78px] h-[41.43px] text-gray-400">
+
+                                    <img id="previewColor1"
+                                        class="absolute inset-0 w-full h-full object-cover hidden">
+
+                                    <input 
+                                        type="file"
+                                        accept="image/*"
+                                        id="iconUploadColor1"
+                                        class="hidden box-border"
+                                        onchange="previewIcon(event,'previewColor1')">
+                                </label>
+                            </div>
+
+                            <div class="">
+                                <div class="flex items-center gap-2 px-[15px] py-[10px] border rounded-[10px] w-[108px]">
+                                    <input 
+                                        type="color"
+                                        value="#000000"
+                                        class="w-[22px] h-[22px] rounded-full cursor-pointer box-border"
+                                        oninput="updateColorCode(this)">
+                                    <span class="text-xs font-mono text-gray-600">
+                                        #000000
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="">
+                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[71px] h-[39px] box-border">
+                            </div>
+
+                            <div class="w-[140px]">
+                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+                            </div>
+
+                            <div class="w-[120px]">
+                                <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[120px] h-[39px] box-border">
+                            </div>
+
+                            <div class="w-[200px]">
+                                <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+                            </div>
+
+                            <div class="w-[200px]">
+                                <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+                            </div>
+
+                            <div class="w-[24px]">
+                                <img src="{{asset('images/icon_delete.png')}}" alt="" class="w-[14px] h-[18px] cursor-pointer delete-color-btn">
+                            </div>
+
     `;
     colorTableBody.appendChild(row);
 }
