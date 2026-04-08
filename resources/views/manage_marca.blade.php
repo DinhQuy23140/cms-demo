@@ -481,12 +481,11 @@
             <div id="modalConfirmDelete" class="fixed inset-0 hidden bg-black bg-opacity-50 z-50 flex items-center justify-center">
                 <div class="bg-white rounded-lg px-[21px] py-[19px]">
                     <div class="w-[330px] flex flex-col items-center gap-[7px]">
-                        <img src="{{ asset('images/cms/icon_cms_v2/icon_question.png') }}" class="w-[60px] h-[60px]">
-                        <h2 class="font-inter font-semibold text-[18px] leading-[28px] tracking-normal text-center align-middle">¿Eliminar este elemento?</h2>
-                        <p class="font-inter font-normal text-[14px] leading-[20px] tracking-normal text-center">¿Estás seguro de que deseas eliminar este</br> elemento? Una vez eliminado, no se podrá</br> recuperar.</p>
+                        <img src="{{ asset('images/cms/icon_cms_v2/icon_warning.png') }}" class="w-[60px] h-[60px]">
+                        <h2 class="font-inter font-semibold text-[18px] leading-[28px] tracking-normal text-center align-middle">No se puede eliminar la marca</h2>
+                        <p class="font-inter font-normal text-[14px] leading-[20px] tracking-normal text-center">No se puede eliminar esta marca porque aún</br> tiene dispositivos activos asociados. Por favor,</br> desactiva o reasigna esos dispositivos antes de</br> volver a intentarlo.</p>
                         <div class="flex justify-end gap-4">
-                            <button id="confirmDeleteBtn" class="flex items-center w-[128px] h-[36px] px-[24px] py-[17px] bg-[#9F5ED9] text-white rounded-[10px]">CONTINUAR</button>
-                            <button id="cancelDeleteBtn" class="flex items-center w-[128px] h-[36px] px-[24px] py-[17px] border border-[#666666] rounded-[10px]">CANCELAR </button>
+                            <button id="confirmDeleteBtn" class="flex items-center justify-center w-[329px] h-[36px] px-[24px] py-[17px] bg-[#9F5ED9] text-white rounded-[10px]">Cambiar</button>
                         </div>
                     </div>
                 </div>
@@ -502,7 +501,7 @@
                             <div class="p-4 w-[100px]">
                                 <div class="flex items-center gap-5">
 
-                                    <label class="switch cursor-pointer flex items-center">
+                                    <label class="switch cursor-pointer flex items-center mb-0">
                                         <input type="checkbox"
                                         {{ $brand->active == 1 ? 'checked' : '' }}>
                                         <span class="slider"></span>
@@ -566,7 +565,7 @@
     <!-- Modal for Add (styled like product modal) -->
     <div id="modalMarca" class="fixed inset-0 bg-black/60 hidden z-50 flex items-center justify-center p-4">
 
-        <form id="marcaFormElem"
+        <form id="marcaFormElem" novalidate
             class="w-[1128px] h-[382px] bg-white rounded-2xl shadow-xl border overflow-hidden flex flex-col gap-[20px]
             py-[15px] px-[37px]">
 
@@ -592,18 +591,20 @@
                         <label class="font-inter font-normal text-[15px] leading-none tracking-normal">
                             Marca ID
                         </label>
-                        <input type="text" placeholder = "Ingresar ID del marca"
+                        <input id="marcaId" type="text" placeholder="Ingresar ID del marca" required
                             class="border border-[#DDDDDD] rounded-[10px] text-sm w-[387px] h-[41px] px-3 placeholder-[#666666]
-                            placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập ID của marca.</span>
                     </div>
 
                     <div class="flex flex-col gap-[6px]">
                         <label class="font-inter font-normal text-[15px] leading-none tracking-normal">
                             Nombre del Marca
                         </label>
-                        <input type="text" placeholder = "Ingresar nombre del marca"
+                        <input id="marcaNombre" type="text" placeholder="Ingresar nombre del marca" required
                             class="border border-[#DDDDDD] rounded-[10px] text-sm w-[647px] h-[41px] px-3
                             placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập tên marca.</span>
                     </div>
 
                 </div>
@@ -669,7 +670,6 @@
     const modalMarca = document.getElementById('modalMarca')
     const modalDelete = document.getElementById('modalConfirmDelete')
     const confirmDeleteBtn = document.getElementById('confirmDeleteBtn')
-    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn')
     const closeMarcaModal = document.getElementById('closeMarcaModal')
     const cancelMarcaBtn = document.getElementById('cancelMarcaBtn')
     const marcaFormElem = document.getElementById('marcaFormElem')
@@ -694,9 +694,6 @@
         modalDelete.classList.add('hidden')
     })
 
-    cancelDeleteBtn && cancelDeleteBtn.addEventListener('click', () => {
-        modalDelete.classList.add('hidden')
-    })
 
     openModal && openModal.addEventListener('click', openMarca)
     closeMarcaModal && closeMarcaModal.addEventListener('click', closeMarca)
@@ -722,20 +719,81 @@
         updateToggle()
     }
 
+    // Validation functions
+    function showFieldError(field, message) {
+        const container = field.parentElement;
+        if (!container) return;
+        let error = container.querySelector('.field-error');
+        if (!error) {
+            error = document.createElement('span');
+            error.className = 'field-error text-red-600 text-xs mt-1 block';
+            container.appendChild(error);
+        }
+        error.textContent = message;
+        error.classList.remove('hidden');
+    }
+
+    function clearFieldError(field) {
+        const container = field.parentElement;
+        if (!container) return;
+        const error = container.querySelector('.field-error');
+        if (error) {
+            error.textContent = '';
+            error.classList.add('hidden');
+        }
+    }
+
+    function validateMarcaForm() {
+        if (!marcaFormElem) return true;
+
+        const requiredFields = marcaFormElem.querySelectorAll('[required]');
+        const errors = [];
+
+        requiredFields.forEach(field => {
+            const value = field.type === 'checkbox' ? field.checked : String(field.value).trim();
+            const invalid = value === '';
+
+            if (invalid) {
+                field.classList.add('border-red-500');
+                field.classList.remove('border-[#DDDDDD]');
+                showFieldError(field, 'Vui lòng nhập thông tin này.');
+                errors.push(field);
+            } else {
+                field.classList.remove('border-red-500');
+                field.classList.add('border-[#DDDDDD]');
+                clearFieldError(field);
+            }
+        });
+
+        if (errors.length > 0) {
+            errors[0].focus();
+            return false;
+        }
+
+        return true;
+    }
+
     // handle submit (demo: log values and close)
     marcaFormElem && marcaFormElem.addEventListener('submit', (e) => {
-        e.preventDefault()
-        const data = {
-            name: document.getElementById('input1').value,
-            code: document.getElementById('input2').value,
-            desc: document.getElementById('input3').value,
-            active: toggleSwitch.checked
+        e.preventDefault();
+        if (validateMarcaForm()) {
+            const data = {
+                marcaId: document.getElementById('marcaId').value,
+                marcaNombre: document.getElementById('marcaNombre').value,
+                active: toggleSwitch.checked
+            };
+            console.log('Add Marca:', data);
+            marcaFormElem.reset();
+            if (typeof updateToggle === 'function') updateToggle();
+            closeMarca();
         }
-        console.log('Add Marca:', data)
-        marcaFormElem.reset()
-        if (typeof updateToggle === 'function') updateToggle()
-        closeMarca()
-    })
+    });
+
+    // Clear validation errors on input
+    marcaFormElem && marcaFormElem.querySelectorAll('[required]').forEach(field => {
+        field.addEventListener('input', () => clearFieldError(field));
+        field.addEventListener('change', () => clearFieldError(field));
+    });
     </script>
 
 </body>
