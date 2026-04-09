@@ -99,31 +99,16 @@
 
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
 
-        <form id="createProductForm" class="w-[1126px] h-[841px] px-[37px] py-[15px] flex flex-col gap-[20px] bg-white rounded-[10px] overflow-y-auto" novalidate>
+        <div id="configForm" class="w-[1126px] h-[841px] px-[37px] py-[15px] flex flex-col gap-[20px] bg-white rounded-[10px] overflow-y-auto">
 
             <!-- TITLE -->
             <h1 class="font-inter text-[20px] font-semibold leading-none tracking-normal flex justify-between items-center">
                 Agregar nuevo Equipo
-                <button type="button" id="closeModal" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
+                <button   button id="closeModal" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
             </h1>
 
             <!-- PRODUCT INFORMATION -->
             <div class="flex gap-[20px]">
-                <!-- Product ID -->
-                <div class="flex flex-col space-y-1 w-[387px]">
-                    <label class="text-sm font-medium text-gray-700">
-                        Producto ID
-                    </label>
-                    <input
-                        id = "productIdInput"
-                        type="text"
-                        required
-                        maxlength="50"
-                        placeholder="Ingresar ID del Producto"
-                        class="w-full border rounded-[10px] px-3 py-2 font-inter text-sm leading-none placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
-                    <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập mã sản phẩm.</span>
-                </div>
                 <!-- Product Name -->
                 <div class="flex flex-col space-y-1 w-[647px]">
                     <label class="text-sm font-medium text-gray-700">
@@ -137,37 +122,35 @@
                         placeholder="Ingresar nombre del producto"
                         class="w-full border rounded-[10px] px-3 py-2 font-inter text-sm leading-none placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-blue-400"
                     >
-                    <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập tên sản phẩm.</span>
                 </div>
-            </div>
-            <!-- Brand -->
-            <div class="flex flex-col space-y-1 w-[382px]">
-                <label class="text-sm font-medium text-gray-700">
-                    Marca
-                </label>
-                <div class="relative">
-                <select
-                    id="brandSelect"
-                    required
-                    class="w-full appearance-none border rounded-[10px] px-3 py-2 pr-10 bg-white h-[41px]
-                        font-inter text-sm font-normal leading-none tracking-normal text-[#666666]
-                        focus:outline-none focus:ring-2 focus:ring-blue-400"
-                >
-                    <option value="">Seleccione Marca</option>
-                    @foreach($brands as $brand)
-                        <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
-                    @endforeach
-                </select>
-                    <!-- custom arrow -->
-                    <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 9l-7 7-7-7"/>
-                        </svg>
-                    </div>
+
+                <!-- Brand -->
+                <div class="flex flex-col space-y-1 w-[480px]">
+                    <label class="text-sm font-medium text-gray-700">
+                        Marca
+                    </label>
+                    <div class="relative">
+                    <select
+                        id="brandSelect"
+                        required
+                        class="w-full appearance-none border rounded-[10px] px-3 py-2 pr-10 bg-white h-[41px]
+                            font-inter text-sm font-normal leading-none tracking-normal text-[#666666]
+                            focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    >
+                        <option value="">Seleccione Marca</option>
+                        @foreach($brands as $brand)
+                            <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
+                        @endforeach
                     </select>
-                    <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn thương hiệu.</span>
+                        <!-- custom arrow -->
+                        <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -202,15 +185,11 @@
                         <div class="flex gap-[25px] items-top py-2">
 
                             <!-- No -->
-                            <div>
-                                <input id="detailNoInput" type="number" required class="border w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]">
-                                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập thứ tự.</span>
-                            </div>
+                            <input id="detailNoInput" type="number" required class="border w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]">
 
 
                             <!-- Icon -->
-                            <div>
-                                <label for="iconUploadDetail1"
+                            <label for="iconUploadDetail1"
                                 class="w-[147px] min-h-[105px] flex flex-col items-center justify-center
                                 border border-[#E8E8E8] rounded-[10px] cursor-pointer
                                 transition relative overflow-hidden gap-[20px]">
@@ -227,14 +206,11 @@
                                     id="iconUploadDetail1"
                                     class="hidden"
                                 >
-                                </label>
-                                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn ảnh.</span>
-                            </div>
+                            </label>
 
 
                             <!-- Title -->
                             <input id="detailTitleInput" required type="text" class="border p-1 rounded-[10px] w-[119px] h-[41px] border border-[#E8E8E8] rounded-[10px]">
-                            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập tiêu đề.</span>
 
 
                             <!-- Title Color -->
@@ -248,7 +224,6 @@
                                     class="w-[22px] h-[22px] rounded-full cursor-pointer color-input"
                                     data-color-span="true"
                                 >
-                                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn màu.</span>
 
                                 <span class="text-[13px] font-mono text-gray-600 w-[76px] h-[22px]">
                                     #000000
@@ -259,7 +234,6 @@
 
                             <!-- Description -->
                             <input id="detailDescriptionInput" required type="text" class="border rounded-[10px] w-[239px] h-[41px] border border-[#E8E8E8] rounded-[10px]">
-                            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập mô tả.</span>
 
 
                             <!-- Description Color -->
@@ -273,7 +247,6 @@
                                     class="w-[22px] h-[22px] p-0 border-0 rounded-full cursor-pointer color-input"
                                     data-color-span="true"
                                 >
-                                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn màu mô tả.</span>
 
                                 <span class="text-[13px] font-medium">
                                     #000000
@@ -321,7 +294,6 @@
                         <div class="font-inter font-normal leading-[100%] tracking-normal w-[58px] text-[16px] shrink-0">Stock</div>
                         <div class="font-inter font-normal leading-[100%] tracking-normal w-[107px] text-[16px] shrink-0">Precio original</div>
                         <div class="font-inter font-normal leading-[100%] tracking-normal w-[106px] text-[16px] shrink-0">Descuento</div>
-                        <div class="font-inter font-normal leading-[100%] tracking-normal w-[116px] text-[15px] shrink-0">URL</div>
                         <div class="font-inter font-normal leading-[100%] tracking-normal w-[105px] text-[15px] shrink-0">Código del producto en BCCS</div>
                         <div class="font-inter font-normal leading-[100%] tracking-normal w-[59px] text-[16px] shrink-0">Borrar</div>
                     </div>
@@ -332,7 +304,6 @@
 
                             <div class="">
                                 <input id="productoNo" required type="number" class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
-                                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập số thứ tự.</span>
                             </div>
 
                             <div class="">
@@ -352,7 +323,6 @@
                                         accept="image/*"
                                         id="iconUploadColor1"
                                         class="hidden box-border">
-                                    <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn ảnh.</span>
                                 </label>
                             </div>
 
@@ -369,35 +339,26 @@
                                         #000000
                                     </span>
                                 </div>
-                                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn màu.</span>
                             </div>
 
                             <div class="">
                                 <input id="productStockInput" required type="number" class="border border-[#E8E8E8] rounded-[10px] w-[71px] h-[39px] box-border">
                             </div>
 
-                            <div class="w-[140px]">
+                            <div class="">
                                 <input id="productPrecio" required type="number" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
-                                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập giá gốc.</span>
                             </div>
 
                             <div class="w-[120px]">
                                 <input id="productDescription" required type="number" class="border border-[#E8E8E8] rounded-[10px] w-[120px] h-[39px] box-border">
-                                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập giảm giá.</span>
                             </div>
 
-                            <div class="w-[200px]">
-                                <input id="productURL" required type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
-                                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập URL.</span>
-                            </div>
-
-                            <div class="w-[200px]">
+                            <div class="">
                                 <input id="productBCCS" required type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
-                                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập mã BCCS.</span>
                             </div>
 
                             <div class="w-[24px]">
-                                <img src="{{asset('images/cms/icon_cms_v2/icon_delete.png')}}" alt="" class="w-[14px] h-[18px] cursor-pointer delete-color-btn">
+                                <img src="{{asset('images/cms/icon_cms_v2/icon_delete.png')}}" alt="" class="w-[18px] h-[18px] cursor-pointer delete-color-btn">
                             </div>
 
                         </div>
@@ -425,12 +386,12 @@
             <!-- SUBMIT -->
             <div class="flex justify-start gap-[40px]">
 
-                <button id="saveBtn" type="button"
+                <button type="submit"
                 class= "flex items-center justify-center w-[95px] h-[36px] bg-[#03558B] border rounded-[10px] text-white px-[38px] py-[9px]">
                     Guardar
                 </button>
 
-                <button id="cancelBtn" type="button"
+                <button id="cancelBtn"
                 class="flex items-center justify-center w-[95px] h-[36px] border border-[#03558B] text-[#03558B] rounded-[10px] px-[38px] py-[9px]">
                     Cancel
                 </button>
@@ -438,7 +399,7 @@
 
             </div>
 
-        </form>
+        </div>
 
     </div>
 
@@ -562,91 +523,6 @@ deleteBtns.forEach(btn => {
     }); 
 });
 
-const modalForm = document.getElementById('createProductForm');
-const saveBtn = document.getElementById('saveBtn');
-const modalErrors = document.createElement('div');
-modalErrors.id = 'modalErrors';
-modalErrors.className = 'hidden rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700 mb-2';
-if (modalForm) {
-    modalForm.insertBefore(modalErrors, modalForm.firstChild);
-}
-
-function showFieldError(field, message) {
-    const container = field.parentElement || field.closest('div');
-    if (!container) return;
-    let error = container.querySelector('.field-error');
-    if (!error) {
-        error = document.createElement('span');
-        error.className = 'field-error text-red-600 text-xs mt-1 block';
-        container.appendChild(error);
-    }
-    error.textContent = message;
-    error.classList.remove('hidden');
-}
-
-function clearFieldError(field) {
-    const container = field.parentElement || field.closest('div');
-    if (!container) return;
-    const error = container.querySelector('.field-error');
-    if (error) {
-        error.textContent = '';
-        error.classList.add('hidden');
-    }
-}
-
-function validateCreateModal() {
-    if (!modalForm) return true;
-
-    const requiredFields = modalForm.querySelectorAll('[required]');
-    const errors = [];
-
-    requiredFields.forEach(field => {
-        const value = field.type === 'checkbox' ? field.checked : String(field.value).trim();
-        const invalid = field.tagName === 'SELECT' ? value === '' : value === '';
-        let message = 'Vui lòng nhập thông tin này.';
-
-        if (field.tagName === 'SELECT') {
-            message = 'Vui lòng chọn giá trị.';
-        } else if (field.type === 'number') {
-            message = 'Vui lòng nhập số hợp lệ.';
-        }
-
-        if (invalid) {
-            field.classList.add('border-red-500');
-            field.classList.remove('border-[#E8E8E8]');
-            showFieldError(field, message);
-            errors.push(field);
-        } else {
-            field.classList.remove('border-red-500');
-            field.classList.add('border-[#E8E8E8]');
-            clearFieldError(field);
-        }
-    });
-
-    if (errors.length > 0) {
-        modalErrors.textContent = 'Vui lòng hoàn thành các trường bắt buộc.';
-        modalErrors.classList.remove('hidden');
-        errors[0].focus();
-        return false;
-    }
-
-    modalErrors.classList.add('hidden');
-    modalErrors.textContent = '';
-    return true;
-}
-
-if (saveBtn && modalForm) {
-    saveBtn.addEventListener('click', () => {
-        if (validateCreateModal()) {
-            modalForm.submit();
-        }
-    });
-    modalForm.querySelectorAll('[required]').forEach(field => {
-        field.addEventListener('input', () => clearFieldError(field));
-        field.addEventListener('change', () => clearFieldError(field));
-    });
-}
-
 function previewIcon(event, previewId){
     const file = event.target.files[0];
 
@@ -724,14 +600,10 @@ function addDetailRow() {
 
     row.innerHTML = `
         <!-- No -->
-        <div>
-            <input 
-                type="number"
-                required
-                class="w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
-            >
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập số thứ tự.</span>
-        </div>
+        <input 
+            type="number"
+            class="w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
+        >
 
         <!-- Icon -->
         <label for="${iconUploadId}"
@@ -747,74 +619,56 @@ function addDetailRow() {
 
             <input 
                 type="file"
-                required
                 accept="image/*"
                 id="${iconUploadId}"
                 class="hidden"
             >
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn ảnh.</span>
         </label>
 
         <!-- Title -->
-        <div>
-            <input
-                type="text"
-                required
-                class="w-[119px] h-[41px] border border-[#E8E8E8] rounded-[10px] p-1"
-            >
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập tiêu đề.</span>
-        </div>
+        <input
+            type="text"
+            class="w-[119px] h-[41px] border border-[#E8E8E8] rounded-[10px] p-1"
+        >
 
         <!-- Title Color -->
-        <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-[10px] w-[129px] h-[44px]
-                border border-[#E8E8E8] rounded-[10px] bg-gray-50 px-[15px] py-[12px]">
+        <div class="flex items-center gap-[10px] w-[129px] h-[44px]
+            border border-[#E8E8E8] rounded-[10px] bg-gray-50 px-[15px] py-[12px]">
 
-                <input
-                    type="color"
-                    required
-                    value="#000000"
-                    class="w-[22px] h-[22px] rounded-full cursor-pointer color-input"
-                    data-color-span="true"
-                >
+            <input
+                type="color"
+                value="#000000"
+                class="w-[22px] h-[22px] rounded-full cursor-pointer color-input"
+                data-color-span="true"
+            >
 
-                <span class="text-[13px] font-mono text-gray-600 w-[76px]">
-                    #000000
-                </span>
+            <span class="text-[13px] font-mono text-gray-600 w-[76px]">
+                #000000
+            </span>
 
-            </div>
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn màu.</span>
         </div>
 
         <!-- Description -->
-        <div>
-            <input
-                type="text"
-                required
-                class="w-[239px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
-            >
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập mô tả.</span>
-        </div>
+        <input
+            type="text"
+            class="w-[239px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
+        >
 
         <!-- Description Color -->
-        <div class="flex flex-col gap-2">
-            <div class="flex items-center gap-2 border border-[#E8E8E8]
-                rounded-[10px] w-[134px] h-[44px] px-[15px] py-[12px]">
+        <div class="flex items-center gap-2 border border-[#E8E8E8]
+            rounded-[10px] w-[134px] h-[44px] px-[15px] py-[12px]">
 
-                <input
-                    type="color"
-                    required
-                    value="#000000"
-                    class="w-[22px] h-[22px] rounded-full cursor-pointer color-input"
-                    data-color-span="true"
-                >
+            <input
+                type="color"
+                value="#000000"
+                class="w-[22px] h-[22px] rounded-full cursor-pointer color-input"
+                data-color-span="true"
+            >
 
-                <span class="text-[13px] font-medium">
-                    #000000
-                </span>
+            <span class="text-[13px] font-medium">
+                #000000
+            </span>
 
-            </div>
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn màu mô tả.</span>
         </div>
 
         <!-- Delete -->
@@ -828,30 +682,15 @@ function addDetailRow() {
     
     // Add event listener to file input
     const fileInput = row.querySelector(`#${iconUploadId}`);
-    if (fileInput) {
-        fileInput.addEventListener('change', function(event) {
-            previewIcon(event, previewId);
-            clearFieldError(this);
-        });
-    }
+    fileInput.addEventListener('change', function(event) {
+        previewIcon(event, previewId);
+    });
     
-    // Add event listeners to color inputs and clear validation markers on change
+    // Add event listeners to color inputs
     const colorInputs = row.querySelectorAll('.color-input');
     colorInputs.forEach(input => {
         input.addEventListener('input', function() {
             updateColorCode(this);
-            clearFieldError(this);
-        });
-    });
-
-    // Clear validation markers when the user edits any dynamically added field
-    const rowInputs = row.querySelectorAll('input');
-    rowInputs.forEach(input => {
-        input.addEventListener('input', function() {
-            clearFieldError(this);
-        });
-        input.addEventListener('change', function() {
-            clearFieldError(this);
         });
     });
 }
@@ -900,8 +739,7 @@ function addColorRow() {
     row.className = "flex gap-[23px] w-[1049px]";
     row.innerHTML = `
         <div class="">
-            <input type="number" required class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập số thứ tự.</span>
+            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
         </div>
 
         <div class="">
@@ -917,54 +755,43 @@ function addColorRow() {
 
                 <input 
                     type="file"
-                    required
                     accept="image/*"
                     id="${iconUploadId}"
                     class="hidden box-border">
-                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn ảnh.</span>
             </label>
         </div>
 
         <div class="">
-            <div class="flex flex-col gap-2">
-                <div class="flex items-center gap-2 px-[15px] py-[10px] border rounded-[10px] w-[108px]">
-                    <input 
-                        type="color"
-                        required
-                        value="#000000"
-                        class="w-[22px] h-[22px] rounded-full cursor-pointer box-border color-input"
-                        data-color-span="true">
-                    <span class="text-xs font-mono text-gray-600">
-                        #000000
-                    </span>
-                </div>
-                <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng chọn màu.</span>
+            <div class="flex items-center gap-2 px-[15px] py-[10px] border rounded-[10px] w-[108px]">
+                <input 
+                    type="color"
+                    value="#000000"
+                    class="w-[22px] h-[22px] rounded-full cursor-pointer box-border color-input"
+                    data-color-span="true">
+                <span class="text-xs font-mono text-gray-600">
+                    #000000
+                </span>
             </div>
         </div>
 
         <div class="">
-            <input type="number" required class="border border-[#E8E8E8] rounded-[10px] w-[71px] h-[39px] box-border">
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập tồn kho.</span>
+            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[71px] h-[39px] box-border">
         </div>
 
         <div class="w-[140px]">
-            <input type="number" required class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập giá gốc.</span>
+            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
         </div>
 
         <div class="w-[120px]">
-            <input type="number" required class="border border-[#E8E8E8] rounded-[10px] w-[120px] h-[39px] box-border">
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập giảm giá.</span>
+            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[120px] h-[39px] box-border">
         </div>
 
         <div class="w-[200px]">
-            <input type="text" required class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập URL.</span>
+            <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
         </div>
 
         <div class="w-[200px]">
-            <input type="text" required class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
-            <span class="field-error hidden text-red-600 text-xs mt-1">Vui lòng nhập mã BCCS.</span>
+            <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
         </div>
 
         <div class="w-[24px]">
@@ -976,32 +803,16 @@ function addColorRow() {
     
     // Add event listener to file input
     const fileInput = row.querySelector(`#${iconUploadId}`);
-    if (fileInput) {
-        fileInput.addEventListener('change', function(event) {
-            previewIcon(event, previewId);
-            clearFieldError(this);
-        });
-    }
+    fileInput.addEventListener('change', function(event) {
+        previewIcon(event, previewId);
+    });
     
     // Add event listener to color input
     const colorInput = row.querySelector('.color-input');
-    if (colorInput) {
-        colorInput.addEventListener('input', function() {
-            updateColorCode(this);
-            clearFieldError(this);
-        });
-    }
-
-    // Clear validation markers for all dynamically added fields
-    const rowInputs = row.querySelectorAll('input');
-    rowInputs.forEach(input => {
-        input.addEventListener('input', function() {
-            clearFieldError(this);
-        });
-        input.addEventListener('change', function() {
-            clearFieldError(this);
-        });
+    colorInput.addEventListener('input', function() {
+        updateColorCode(this);
     });
+    
 }
 
 </script>
