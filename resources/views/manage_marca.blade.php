@@ -2,7 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://cdn.tailwindcss.com"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="https://cdn.tailwindcss.com"></meta>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/js/all.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/cms/cms_v2/style.css') }}">
@@ -314,16 +315,19 @@
     })
 
     // toggle appearance
-    if (toggleSwitch) {
-        const updateToggle = () => {
-            if (toggleSwitch.checked) {
-                marcaTrack.classList.add('bg-blue-600')
-                marcaDot.classList.add('translate-x-5')
-            } else {
-                marcaTrack.classList.remove('bg-blue-600')
-                marcaDot.classList.remove('translate-x-5')
-            }
+    const updateToggle = () => {
+        if (toggleSwitch && toggleSwitch.checked) {
+            marcaTrack.classList.remove('bg-gray-200')
+            marcaTrack.classList.add('bg-[#87D96F]')
+            marcaDot.classList.add('translate-x-5')
+        } else {
+            marcaTrack.classList.remove('bg-[#87D96F]')
+            marcaTrack.classList.add('bg-gray-200')
+            marcaDot.classList.remove('translate-x-5')
         }
+    }
+
+    if (toggleSwitch) {
         toggleSwitch.addEventListener('change', updateToggle)
         updateToggle()
     }
@@ -383,15 +387,35 @@
     }
 
     // handle submit (demo: log values and close)
-    marcaFormElem && marcaFormElem.addEventListener('submit', (e) => {
+    marcaFormElem && marcaFormElem.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (validateMarcaForm()) {
             const data = {
-                marcaId: document.getElementById('marcaId').value,
-                marcaNombre: document.getElementById('marcaNombre').value,
+                brand_name: document.getElementById('marcaNombre').value,
                 active: toggleSwitch.checked
             };
-            console.log('Add Marca:', data);
+
+            try {
+                const response = await fetch('/api/brands', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('Brand created:', result);
+                    // Optionally reload the page or update the list
+                    location.reload();
+                } else {
+                    console.error('Error creating brand:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+
             marcaFormElem.reset();
             if (typeof updateToggle === 'function') updateToggle();
             closeMarca();

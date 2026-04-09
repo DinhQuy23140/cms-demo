@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BrandController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,5 +19,6 @@ Route::get('/', function () {
 });
 
 Route::view('/manage_product', 'manage_product');
+Route::view('/test_ui', 'test_ui');
 Route::view('/manage_notifi', 'manage_notifi');
-Route::view('/manage_marca', 'manage_marca');
+Route::get('/manage_marca', [BrandController::class, 'index'])->name('cms.marca.dashboard');

@@ -1,110 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="{{ asset('css/cms/cms_v2/style.css') }}">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<title>Equipo</title>
-</head>
+@extends('layouts.cms')
 
-<body class="bg-gray-100">
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/cms/noti/noti.css') }}" />
+@endsection
 
-<!-- TOPBAR -->
-<header class="h-[64px] bg-[#03558B99] text-white flex items-center">
+@section('content')
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-[9999] flex items-center justify-center">
 
-    <button id="toggleNav" class="w-[103px] h-[64px] flex items-center justify-center">
-        <img src="{{ asset('images/cms/icon_cms_v2/icon_navbar.png') }}" alt="Menu" class="w-[34px] h-[22.5px]">
-    </button>
-
-    <img src="{{ asset('images/cms/icon_cms_v2/logo_bitel.png') }}" alt="Bitel Logo" class="w-[97px] h-[40px]">
-
-    <div class="ml-6 text-sm font-semibold">
-        Bitel, Tecnología para Todos
-    </div>
-
-</header>
-
-
-<div class="flex h-[calc(100vh-56px)]">
-
-<!-- SIDEBAR -->
-<aside id="sidebar" class="w-[329px]  text-black transition-all duration-300">
-
-<ul class="relative flex flex-col pt-[30px] pr-[20px] pl-[20px] pb-[30px] space-y-[20px]">
-
-    <li class="flex items-center w-[289px] h-[49px] border border-[#BCBCBC] rounded-[10px] px-[19px] py-[7px] gap-[10px]">
-        <span class="font-inter text-[20px] leading-[100%]">Dashboard</span>
-    </li>
-
-    <li class="flex items-center w-[289px] h-[49px] px-[10px] py-[7px] rounded-tr-[20px] rounded-br-[20px]">
-        <a href="" class="flex items-center gap-[10px]">
-            <img src="{{ asset('images/cms/icon_cms_v2/icon_notifi.png') }}" class="w-[24px] h-[24px]">
-            <span class="font-inter text-[20px]">Notificaciones</span>
-        </a>
-    </li>
-
-    <li class="flex items-center w-[289px] h-[49px] gap-[10px] px-[10px] py-[7px] rounded-tr-[20px] rounded-br-[20px]">
-        <a href="{{ route('cms.marca.dashboard') }}" class="flex items-center gap-[10px]">
-            <img src="{{ asset('images/cms/icon_cms_v2/icon_marca.png') }}" class="w-[24px] h-[24px]">
-            <span class="font-inter text-[20px]">Marca</span>
-        </a>
-    </li>
-
-    <li class="flex items-center w-[289px] h-[49px] gap-[10px] px-[10px] py-[7px] rounded-tr-[20px] rounded-br-[20px]">
-        <a href="{{ route('cms.device.dashboard') }}" class="flex items-center gap-[10px]">
-            <img src="{{ asset('images/cms/icon_cms_v2/icon_equipo.png') }}" class="w-[24px] h-[24px]">
-            <span class="font-inter text-[20px]">Equipo</span>
-        </a>
-    </li>
-
-</ul>
-
-</aside>
-
-
-<!-- MAIN -->
-<main class="relative flex-1 pt-[17px] pr-[50px] pb-[100px] pl-[8px] gap-[20px]">
-
-    <div class="font-inter text-[15px] flex items-center gap-[6px]">
-        <a href="#" class="text-[15px] ">
-            Homepage
-        </a>
-
-        <img src="{{asset('images/cms/icon_cms_v2/ic_keyboard_arrow_right.png')}}" alt="">
-
-        <span class="text-[15px] ">
-            Equipo
-        </span>
-    </div>
-
-    <div class="flex items-center justify-between mt-2 mb-4 ">
-
-        <h1 class="font-inter text-[20px] font-semibold leading-none">
-            Equipo
-        </h1>
-
-        <button id="toggleFormBtn"
-            class="flex items-center gap-[10px] bg-[#03558B] text-white px-[17px] py-[9px] rounded-[10px] w-[95px] h-[36px]">
-
-            <img src="{{ asset('images/cms/icon_cms_v2/icon_add.png') }}" class="w-[10px] h-[10px]" />
-
-            <span class="font-inter text-[15px]">
-                Add
-            </span>
-
-        </button>
-
-    </div>
-
-    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
-
-        <div id="configForm" class="w-[1126px] h-[841px] px-[37px] py-[15px] flex flex-col gap-[20px] bg-white rounded-[10px] overflow-y-auto">
+                <div id="configForm" class="w-[1126px] h-[841px] px-[37px] py-[15px] flex flex-col gap-[20px] bg-white rounded-[10px] overflow-y-auto">
+            <form id="productForm">
 
             <!-- TITLE -->
             <h1 class="font-inter text-[20px] font-semibold leading-none tracking-normal flex justify-between items-center">
                 Agregar nuevo Equipo
-                <button   button id="closeModal" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700 text-3xl">&times;</button>
             </h1>
 
             <!-- PRODUCT INFORMATION -->
@@ -152,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+        </div>
 
             <!-- PRODUCT DETAIL -->
             <div class="rounded-xl flex flex-col gap-[10px]">
@@ -182,10 +91,10 @@
 
                     <div id="detailTableBody">
 
-                        <div class="flex gap-[25px] items-top py-2">
+                        <div class="flex gap-[25px] items-top py-2 detail-row">
 
                             <!-- No -->
-                            <input id="detailNoInput" type="number" required class="border w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]">
+                            <input id="detailNoInput" type="number" required value="1" class="border w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]">
 
 
                             <!-- Icon -->
@@ -300,10 +209,10 @@
 
                     <div id="colorTableBody" class="flex flex-col gap-[10px]">
 
-                        <div class="flex gap-[23px] w-[1049px]">
+                        <div class="flex gap-[23px] w-[1049px] color-row">
 
                             <div class="">
-                                <input id="productoNo" required type="number" class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
+                                <input id="productoNo" required type="number" value="1" class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
                             </div>
 
                             <div class="">
@@ -399,11 +308,13 @@
 
             </div>
 
+            </form>
+
         </div>
 
     </div>
 
-    <div id="modalConfirmDelete" class="fixed inset-0 hidden bg-black bg-opacity-50 z-50 flex items-center justify-center">
+    <div id="modalConfirmDelete" class="fixed inset-0 hidden bg-black bg-opacity-50 z-[9998] flex items-center justify-center">
         <div class="bg-white rounded-lg px-[21px] py-[19px]">
             <div class="w-[330px] flex flex-col items-center gap-[7px]">
                 <img src="{{ asset('images/cms/icon_cms_v2/icon_question.png') }}" class="w-[60px] h-[60px]">
@@ -417,111 +328,119 @@
         </div>
     </div>
 
-    <div class=" overflow-hidden">
-        <div id="productTableBody" class="flex flex-col gap-[20px]">
+    <!-- Validation Modal -->
+    <div id="validationModal" class="fixed inset-0 hidden bg-black bg-opacity-50 z-[10000] flex items-center justify-center">
+        <div class="bg-white rounded-lg p-6 w-[360px] text-center shadow-lg">
+            <p class="text-lg font-semibold mb-4">Thông tin không hợp lệ</p>
+            <button id="validationCloseBtn" class="mt-2 px-4 py-2 bg-[#03558B] text-white rounded">Đóng</button>
+        </div>
+    </div>
 
-            @foreach($products as $product)
-
-                <div class="flex items-center justify-between border border-[#E8E8E8] rounded-[10px] px-[12px] py-[16px] hover:bg-gray-50 bg-[#DDDDDD33] transition">
-
-                    <div class="flex items-center justify-center gap-5 w-[100px]">
-                        <label class="switch cursor-pointer flex items-center mb-0">
-                            <input type="checkbox" 
-                            {{ $product->active == 1 ? 'checked' : '' }}>
-                            <span class="slider"></span>
-                        </label>
-
-                        <img src="{{ asset('images/cms/icon_cms_v2/icon_fullview.png') }}" class="w-5 h-5">
-                    </div>
-
-                    <div class="flex-1 text-left text-[13px] font-inter">
-                        {{$product->product_model}}
-                    </div>
-
-                    <div class="flex gap-4 justify-end items-center w-[120px]">
-                        <img src="{{asset('images/cms/icon_cms_v2/icon_edit.png')}}" class="w-[18px] h-[18px]">
-                        <img 
-                            src="{{asset('images/cms/icon_cms_v2/icon_delete.png')}}"
-                            class="w-[24px] h-[24px] cursor-pointer deleteBtn"
-                            data-id="{{$product->id}}"/>
-                    </div>
-
-                </div>
-
-            @endforeach
-
+<div id="cms-noti-app" class="container-fluid py-3">
+    <div class="card shadow-sm border-0">
+        <div class="card-header d-flex justify-content-between align-items-center bg-bitel-yellow-color text-bitel-green-color">
+            <span class="fw-bold fs-8">Equipo</span>
+                <button id="toggleFormBtn" class="btn btn-light btn-sm fw-bold">
+                <i class="fa fa-plus"></i> Agregar
+            </button>
         </div>
 
+        <div class="card-body p-0">
+            <!-- TABLE / MOBILE LIST -->
+            <div class="table-responsive">
+                <table v-if="notifications.length"  class="table no-footer dtr-inline" id="noti-table">
+                    <tbody id="noti-tbody">
+                        @foreach ($products as $product)
+                            <tr  role="row"class="odd" v-for="noti in notifications" :key="noti.id" :data-id="noti.id" :data-priority="noti.priority">
+                                <td class="text-center cursor-move">
+                                    <i class="fa fa-bars text-muted drag-handle"></i>
+                                </td>
+                                <td class="text-center">
+                                    <label class="switch-v2">
+                                        <input type="checkbox"
+                                        {{ $product->active == 1 ? 'checked' : '' }}>
+                                        <span class="slider"></span>
+                                    </label>
+                                </td>
+                                <td>{{$product->product_model}}</td>
+                                <td class="text-end">
+                                    <button class="btn btn-sm btn-outline-secondary me-1">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger deleteBtn">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <!-- PAGINATION -->
+        <div class="flex gap-2 items-center justify-center py-4">
+            {{ $products->links('pagination::bootstrap-4') }}
+        </div>
     </div>
-
-    <div class="flex gap-2 items-center justify-center py-4">
-        {{ $products->links('pagination::bootstrap-4') }}
-    </div>
-
-</main>
-
 </div>
+@endsection
 
 
+@section('js')
+<script src="https://cdn.tailwindcss.com"></script>
 <script>
+    const toggle = document.getElementById("toggleNav")
+    const toggleBtn = document.getElementById("toggleFormBtn");
+    const modal = document.getElementById("modal");
+    const closeBtn = document.getElementById("closeModal");
+    const cancelBtn = document.getElementById("cancelBtn");
+    const modalDeleteBtn = document.getElementById("modalConfirmDelete");
+    const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+    const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
+    const deleteBtns = document.querySelectorAll('.deleteBtn');
 
-const toggle = document.getElementById("toggleNav")
-const sidebar = document.getElementById("sidebar")
-const texts = document.querySelectorAll(".nav-text")
-
-// toggle.onclick = () => {
-
-// sidebar.classList.toggle("w-56")
-// sidebar.classList.toggle("w-16")
-
-// texts.forEach(text => {
-
-// text.classList.toggle("hidden")
-
-// })
-
-// }
-
-const toggleBtn = document.getElementById("toggleFormBtn");
-const modal = document.getElementById("modal");
-const closeBtn = document.getElementById("closeModal");
-const cancelBtn = document.getElementById("cancelBtn");
-const modalDeleteBtn = document.getElementById("modalConfirmDelete");
-const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
-const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
-const deleteBtns = document.querySelectorAll('.deleteBtn')
-
-toggleBtn.addEventListener("click", () => {
-    modal.classList.toggle("hidden");
-});
-
-closeBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-});
-
-cancelBtn.addEventListener("click", () => {
-    modal.classList.add("hidden");
-});
-
-modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
-        modal.classList.add("hidden");
+    function showMainModal() {
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
     }
-});
 
-confirmDeleteBtn.addEventListener("click", () => {
-    modalDeleteBtn.classList.add("hidden");
-});
+    function hideMainModal() {
+        if (!modal) return;
+        modal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    }
 
-cancelDeleteBtn.addEventListener("click", () => {
-    modalDeleteBtn.classList.add("hidden");
-});
+    toggleBtn.addEventListener("click", () => {
+        if (modal.classList.contains('hidden')) showMainModal(); else hideMainModal();
+    });
 
-deleteBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-        modalDeleteBtn.classList.remove("hidden");
-    }); 
-});
+    closeBtn.addEventListener("click", hideMainModal);
+
+    cancelBtn.addEventListener("click", hideMainModal);
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) hideMainModal();
+    });
+
+    confirmDeleteBtn.addEventListener("click", () => {
+        modalDeleteBtn.classList.add("hidden");
+        document.body.classList.remove('overflow-hidden');
+    });
+
+    cancelDeleteBtn.addEventListener("click", () => {
+        modalDeleteBtn.classList.add("hidden");
+        document.body.classList.remove('overflow-hidden');
+    });
+
+    deleteBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            modalDeleteBtn.classList.remove("hidden");
+            document.body.classList.add('overflow-hidden');
+        }); 
+    });
 
 function previewIcon(event, previewId){
     const file = event.target.files[0];
@@ -564,15 +483,16 @@ if (addDetailBtn && detailTableBody) {
     detailTableBody.addEventListener("click", (event) => {
         const deleteButton = event.target.closest(".delete-detail-btn");
         if (deleteButton) {
-            const row = deleteButton.closest(".flex");
+            const row = deleteButton.closest(".detail-row");
             if (row) {
                 row.remove();
+                renumberDetailRows();
             }
         }
     });
     
     // Add event listener to initial row
-    const initialDetailRow = detailTableBody.querySelector(".flex");
+    const initialDetailRow = detailTableBody.querySelector(".detail-row");
     if (initialDetailRow) {
         const detailFileInput = initialDetailRow.querySelector('#iconUploadDetail1');
         if (detailFileInput) {
@@ -591,17 +511,33 @@ if (addDetailBtn && detailTableBody) {
 }
 
 function addDetailRow() {
+    // Find the highest No value in existing rows
+    const existingRows = detailTableBody.querySelectorAll('.detail-row');
+    let maxNo = 0;
+    existingRows.forEach(row => {
+        const noInput = row.querySelector('input[type="number"]');
+        if (noInput && noInput.value) {
+            const noValue = parseInt(noInput.value, 10);
+            if (!isNaN(noValue) && noValue > maxNo) {
+                maxNo = noValue;
+            }
+        }
+    });
+    const nextNo = maxNo + 1;
+
     const uniqueId = Date.now() + Math.random().toString(36).substr(2, 9);
     const iconUploadId = 'iconUploadDetail' + uniqueId;
     const previewId = 'previewDetail' + uniqueId;
     const row = document.createElement("div");
 
-    row.className = "flex gap-[25px] items-start py-2";
+    row.className = "flex gap-[25px] items-start py-2 detail-row";
 
     row.innerHTML = `
         <!-- No -->
         <input 
+            required
             type="number"
+            value="${nextNo}"
             class="w-[41px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
         >
 
@@ -618,6 +554,7 @@ function addDetailRow() {
                  class="absolute inset-0 w-full h-full object-cover hidden">
 
             <input 
+                required
                 type="file"
                 accept="image/*"
                 id="${iconUploadId}"
@@ -627,6 +564,7 @@ function addDetailRow() {
 
         <!-- Title -->
         <input
+            required
             type="text"
             class="w-[119px] h-[41px] border border-[#E8E8E8] rounded-[10px] p-1"
         >
@@ -636,6 +574,7 @@ function addDetailRow() {
             border border-[#E8E8E8] rounded-[10px] bg-gray-50 px-[15px] py-[12px]">
 
             <input
+                required
                 type="color"
                 value="#000000"
                 class="w-[22px] h-[22px] rounded-full cursor-pointer color-input"
@@ -650,6 +589,7 @@ function addDetailRow() {
 
         <!-- Description -->
         <input
+            required
             type="text"
             class="w-[239px] h-[41px] border border-[#E8E8E8] rounded-[10px]"
         >
@@ -659,6 +599,7 @@ function addDetailRow() {
             rounded-[10px] w-[134px] h-[44px] px-[15px] py-[12px]">
 
             <input
+                required
                 type="color"
                 value="#000000"
                 class="w-[22px] h-[22px] rounded-full cursor-pointer color-input"
@@ -693,6 +634,33 @@ function addDetailRow() {
             updateColorCode(this);
         });
     });
+
+    // Add event listeners to clear validation errors
+    const newInputs = row.querySelectorAll('[required]');
+    newInputs.forEach(field => {
+        field.addEventListener('input', () => {
+            field.classList.remove('border-red-500');
+            field.classList.add('border-[#E8E8E8]');
+            if (field.type === 'file') {
+                const label = field.closest('label');
+                if (label) {
+                    label.classList.remove('border-red-500');
+                    label.classList.add('border-[#E8E8E8]');
+                }
+            }
+        });
+        field.addEventListener('change', () => {
+            field.classList.remove('border-red-500');
+            field.classList.add('border-[#E8E8E8]');
+            if (field.type === 'file') {
+                const label = field.closest('label');
+                if (label) {
+                    label.classList.remove('border-red-500');
+                    label.classList.add('border-[#E8E8E8]');
+                }
+            }
+        });
+    });
 }
 const addColorBtn = document.getElementById("addColorBtn");
 const colorTableBody = document.getElementById("colorTableBody");
@@ -705,15 +673,16 @@ if (addColorBtn && colorTableBody) {
     colorTableBody.addEventListener("click", (event) => {
         const deleteButton = event.target.closest(".delete-color-btn");
         if (deleteButton) {
-            const row = deleteButton.closest(".flex");
+            const row = deleteButton.closest(".color-row");
             if (row) {
                 row.remove();
+                renumberColorRows();
             }
         }
     });
     
     // Add event listener to initial row
-    const initialColorRow = colorTableBody.querySelector(".flex");
+    const initialColorRow = colorTableBody.querySelector(".color-row");
     if (initialColorRow) {
         const colorFileInput = initialColorRow.querySelector('#iconUploadColor1');
         if (colorFileInput) {
@@ -732,14 +701,28 @@ if (addColorBtn && colorTableBody) {
 }
 
 function addColorRow() {
+    // Find the highest No value in existing rows
+    const existingRows = colorTableBody.querySelectorAll('.color-row');
+    let maxNo = 0;
+    existingRows.forEach(row => {
+        const noInput = row.querySelector('input[type="number"]');
+        if (noInput && noInput.value) {
+            const noValue = parseInt(noInput.value, 10);
+            if (!isNaN(noValue) && noValue > maxNo) {
+                maxNo = noValue;
+            }
+        }
+    });
+    const nextNo = maxNo + 1;
+
     const uniqueId = Date.now() + Math.random().toString(36).substr(2, 9);
     const iconUploadId = 'iconUploadColor' + uniqueId;
     const previewId = 'previewColor' + uniqueId;
     const row = document.createElement("div");
-    row.className = "flex gap-[23px] w-[1049px]";
+    row.className = "flex gap-[23px] w-[1049px] color-row";
     row.innerHTML = `
         <div class="">
-            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
+            <input required type="number" value="${nextNo}" class="border border-[#E8E8E8] rounded-[10px] w-[36px] h-[35px] box-border">
         </div>
 
         <div class="">
@@ -754,6 +737,7 @@ function addColorRow() {
                     class="absolute inset-0 w-full h-full object-cover hidden">
 
                 <input 
+                    required
                     type="file"
                     accept="image/*"
                     id="${iconUploadId}"
@@ -764,6 +748,7 @@ function addColorRow() {
         <div class="">
             <div class="flex items-center gap-2 px-[15px] py-[10px] border rounded-[10px] w-[108px]">
                 <input 
+                    required
                     type="color"
                     value="#000000"
                     class="w-[22px] h-[22px] rounded-full cursor-pointer box-border color-input"
@@ -775,23 +760,19 @@ function addColorRow() {
         </div>
 
         <div class="">
-            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[71px] h-[39px] box-border">
+            <input required type="number" class="border border-[#E8E8E8] rounded-[10px] w-[71px] h-[39px] box-border">
         </div>
 
-        <div class="w-[140px]">
-            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+        <div class="w-[125px]">
+            <input required type="number" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
         </div>
 
         <div class="w-[120px]">
-            <input type="number" class="border border-[#E8E8E8] rounded-[10px] w-[120px] h-[39px] box-border">
+            <input required type="number" class="border border-[#E8E8E8] rounded-[10px] w-[120px] h-[39px] box-border">
         </div>
 
-        <div class="w-[200px]">
-            <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
-        </div>
-
-        <div class="w-[200px]">
-            <input type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
+        <div class="w-[125px]">
+            <input required type="text" class="border border-[#E8E8E8] rounded-[10px] w-[125px] h-[39px] box-border">
         </div>
 
         <div class="w-[24px]">
@@ -812,10 +793,116 @@ function addColorRow() {
     colorInput.addEventListener('input', function() {
         updateColorCode(this);
     });
+
+    // Add event listeners to clear validation errors
+    const newInputs = row.querySelectorAll('[required]');
+    newInputs.forEach(field => {
+        field.addEventListener('input', () => {
+            field.classList.remove('border-red-500');
+            field.classList.add('border-[#E8E8E8]');
+            if (field.type === 'file') {
+                const label = field.closest('label');
+                if (label) {
+                    label.classList.remove('border-red-500');
+                    label.classList.add('border-[#E8E8E8]');
+                }
+            }
+        });
+        field.addEventListener('change', () => {
+            field.classList.remove('border-red-500');
+            field.classList.add('border-[#E8E8E8]');
+            if (field.type === 'file') {
+                const label = field.closest('label');
+                if (label) {
+                    label.classList.remove('border-red-500');
+                    label.classList.add('border-[#E8E8E8]');
+                }
+            }
+        });
+    });
     
 }
 
-</script>
+function renumberDetailRows() {
+    const rows = detailTableBody.querySelectorAll('.detail-row');
+    rows.forEach((row, index) => {
+        const noInput = row.querySelector('input[type="number"]');
+        if (noInput) {
+            noInput.value = index + 1;
+        }
+    });
+}
 
-</body>
-</html>
+function renumberColorRows() {
+    const rows = colorTableBody.querySelectorAll('.color-row');
+    rows.forEach((row, index) => {
+        const noInput = row.querySelector('input[type="number"]');
+        if (noInput) {
+            noInput.value = index + 1;
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('productForm');
+    const validationModal = document.getElementById('validationModal');
+    const validationCloseBtn = document.getElementById('validationCloseBtn');
+
+    if (!form) return;
+
+    // 1) Ensure `required` on all inputs, selects, textareas inside the form
+    form.querySelectorAll('input, select, textarea').forEach(el => el.setAttribute('required', ''));
+
+    // Helper: check validity for required fields
+    function isElementValid(el) {
+        if (!el.hasAttribute('required')) return true;
+        const type = el.type;
+        if (type === 'file') return el.files && el.files.length > 0;
+        if (type === 'checkbox' || type === 'radio') return el.checked;
+        const v = el.value;
+        return v !== null && String(v).trim() !== '';
+    }
+
+    // 2) On submit: validate required fields, add red border for invalids, show modal
+    form.addEventListener('submit', (e) => {
+        let invalidFound = false;
+        const requiredFields = form.querySelectorAll('[required]');
+        requiredFields.forEach(el => {
+            if (!isElementValid(el)) {
+                el.classList.add('border-red-500');
+                invalidFound = true;
+            } else {
+                el.classList.remove('border-red-500');
+            }
+        });
+
+        if (invalidFound) {
+            e.preventDefault();
+            if (validationModal) {
+                validationModal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+        }
+    });
+
+    // 5) Remove red border when user corrects the field
+    function handleInteractiveValidation(e) {
+        const el = e.target;
+        if (!el || !el.hasAttribute) return;
+        if (!el.hasAttribute('required')) return;
+        if (isElementValid(el)) el.classList.remove('border-red-500');
+    }
+    form.addEventListener('input', handleInteractiveValidation);
+    form.addEventListener('change', handleInteractiveValidation);
+
+    // Modal close logic
+    if (validationCloseBtn && validationModal) {
+        validationCloseBtn.addEventListener('click', () => {
+            validationModal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        });
+        validationModal.addEventListener('click', (ev) => { if (ev.target === validationModal) { validationModal.classList.add('hidden'); document.body.classList.remove('overflow-hidden'); } });
+    }
+});
+</script>
+@endsection
